@@ -1,22 +1,9 @@
+// Harvey Randall 2020-2022, Parser to turn Tokens into AST
+
+// [Tokeniser] -> [Paset (AST)] -> [Traverser]
+
+import { astRoot, mainNode, outputTozenised } from '../types/maintypes';
 import { fetchLogger } from '../utils/logger';
-import { outputTozenised } from './Tokeniser';
-
-interface mainNode {
-    type: string;
-    name?: string;
-    params?: mainNode[];
-    value?: string;
-}
-
-interface astRoot {
-    type: string;
-    body: mainNode[];
-}
-
-export interface ParseOut {
-    type: string;
-    body: mainNode[];
-}
 
 export function parser(tokens: outputTozenised[]) {
     let current = 0;

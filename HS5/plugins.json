@@ -1,0 +1,174 @@
+{
+    "plugins": [
+      {
+        "case": "openFile",
+        "file": "openFile.js"
+      },
+      {
+        "case": "writeFile",
+        "file": "writeFile.js"
+      },
+      {
+        "case": "While",
+        "file": "whileLoop.js"
+      },
+      {
+        "case": "comment",
+        "file": "JSComment.js"
+      },
+      {
+        "case": "join",
+        "file": "join.js"
+      },
+      {
+        "case": "interval",
+        "file": "interval.js"
+      },
+      {
+        "case": "listen",
+        "file": "eventListener.js"
+      },
+      {
+        "case": "TimeOut",
+        "file": "Timeout.js"
+      },
+      {
+        "case": "Num",
+        "file": "num.js"
+      },
+      {
+        "case": "Multiply",
+        "file": "multiply.js"
+      },
+      {
+        "case": "uuid",
+        "file": "UUID.js"
+      },
+      {
+        "case": "StringConcat",
+        "file": "PreCompConcat.js"
+      },
+      {
+        "case": "stateFulVar",
+        "file": "EventDispatcher.js"
+      },
+      {
+        "case": "listenToState",
+        "file": "registerEventListener.js"
+      },
+      {
+        "case": "MultiState",
+        "file": "MultiListener.js"
+      },
+      {
+        "case": "empty",
+        "file": "empty.js"
+      },
+      {
+        "case": "scss",
+        "file": "scssComp.js"
+      },
+      {
+        "case": "forArray",
+        "file": "forArray.js"
+      },
+      {
+        "case": "Template",
+        "file": "Template.js"
+      },
+      {
+        "case": "flatten",
+        "file": "flatten.js"
+      },
+      {
+        "case": "type",
+        "file": "typeof.js"
+      },
+      {
+        "case": "try",
+        "file": "try.js"
+      },
+      {
+        "case": "split",
+        "file": "destruc.js"
+      },
+      {
+        "case": "args",
+        "file": "destructructingArray.js"
+      },
+      
+
+
+      {
+        "case": "render",
+        "file": "HTML_Tags/renderHandler.js"
+      },
+
+      {
+        "case": "hOne",
+        "file": "HTML_Tags/h1.js"
+      },
+      {
+        "case": "hTwo",
+        "file": "HTML_Tags/h2.js"
+      },
+      {
+        "case": "hThree",
+        "file": "HTML_Tags/h3.js"
+      },
+      {
+        "case": "p",
+        "file": "HTML_Tags/p.js"
+      },
+      {
+        "case": "div",
+        "file": "HTML_Tags/div.js"
+      },
+      {
+        "case": "style",
+        "file": "HTML_Tags/style.js"
+      },
+      {
+        "case": "button",
+        "file": "HTML_Tags/button.js"
+      },
+      {
+        "case": "a",
+        "file": "HTML_Tags/a.js"
+      },
+      {
+        "case": "ul",
+        "file": "HTML_Tags/ul.js"
+      },
+      {
+        "case": "ol",
+        "file": "HTML_Tags/ol.js"
+      },
+      {
+        "case": "li",
+        "file": "HTML_Tags/li.js"
+      },
+      {
+        "case": "footer",
+        "file": "HTML_Tags/footer.js"
+      },
+
+      {
+        "case": "useUpdate",
+        "file": "HTML_Tags/useUpdate.js"
+      },
+      {
+        "case": "useHook",
+        "file": "HTML_Tags/useHook.js"
+      },
+      {
+        "case": "usePortal",
+        "file": "HTML_Tags/componentBoolean.js"
+      },
+      {
+        "case": "hookFunction",
+        "file": "HTML_Tags/hookFunction.js"
+      }
+
+    ]
+}

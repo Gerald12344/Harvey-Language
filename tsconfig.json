@@ -6,7 +6,7 @@
         "outDir": "./lib",
         "strict": true
     },
-    "include": ["src"],
+    "include": ["src", "HS5"],
     "exclude": ["node_modules", "**/__tests__/*"],
     "allowJs": true
 }

@@ -1,4 +1,4 @@
-import { tokenizer } from './Tokeniser';
+import { tokenizer } from '../compiler/Tokeniser';
 
 test('Tozeniser, Standard Harvscript', () => {
   expect(
