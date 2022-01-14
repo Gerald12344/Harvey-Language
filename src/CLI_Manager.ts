@@ -46,4 +46,17 @@ ${colors.info}---------------------------[${colors.text}Harv Script${colors.info
 v1.0.1
 ${colors.error}Ⓒ Harvey Randall 2020-2022${colors.text}    `);
         break;
+    default:
+        console.log(`
+${colors.info}---------------------------[${colors.text}Harv Script${colors.info}]---------------------------${colors.text}
+
+    --help: Show this help message
+    --version: Show the version of this tool
+    --compile: Compile a harvscript file
+    --watch: Watch a harvscript file and compile it when it changes
+    --create-app: Create a new harvscript app
+
+${colors.error}Ⓒ Harvey Randall 2020-2022${colors.text}
+            `);
+        break;
 }

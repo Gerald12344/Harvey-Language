@@ -1,24 +1,26 @@
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { join } from 'path';
+import { dirname } from 'path/posix';
 
 function createFile(path: string, content: string) {
-    writeFileSync(path, content);
+    writeFileSync(join(dirname(require?.main?.filename || ''), path), content);
 }
 
 function createFolder(path: string) {
-    if (!existsSync(path)) {
-        mkdirSync(path);
+    if (!existsSync(join(dirname(require?.main?.filename || ''), path))) {
+        mkdirSync(join(dirname(require?.main?.filename || ''), path));
     }
 }
 
 export function createApp() {
-    createFolder('./src');
-    createFolder('./src/components');
-    createFolder('./src/pages');
-    createFolder('./src/public');
-    createFolder('./src/public/imports');
+    createFolder('../src');
+    createFolder('../src/components');
+    createFolder('../src/pages');
+    createFolder('../src/public');
+    createFolder('../src/public/imports');
 
     createFile(
-        './src/public/index.harvey',
+        '../src/public/index.harvey',
         `<!-- 
     This project was made using .Harvey, a framework and language created and developer by Harvey Randall
     https://www.github.com/Gerald12344
@@ -44,7 +46,7 @@ export function createApp() {
 </html>`,
     );
     createFile(
-        './src/public/index.css',
+        '../src/public/index.css',
         `@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
     .nav-button{
         background-color: #4CAF50; /* Green */

@@ -1,6 +1,6 @@
 {
-  "name": "harvey_npm",
-  "version": "1.0.0",
+  "name": "harvey-language",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -43,5 +43,5 @@
     "winston": "^3.3.0",
     "winston-transport": "^4.4.2"
   },
-  "bin": "./lib/CLI_Manaer.js"
+  "bin": "lib/CLI_Manager.js"
 }
