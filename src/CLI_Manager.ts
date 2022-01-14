@@ -3,6 +3,7 @@
 import { compileFile } from './compiler/compilerEntry';
 import { createApp } from './utils/createApp';
 import { CreateMainLogger } from './utils/logger';
+import { loadHarvScript } from './utils/pluginManager';
 import { lookforSettings } from './utils/settings';
 import { watchChangesWithWebServer } from './utils/watch';
 
@@ -15,6 +16,7 @@ let colors = {
 };
 lookforSettings();
 CreateMainLogger();
+loadHarvScript();
 
 switch (process.argv[2]) {
     case 'help':

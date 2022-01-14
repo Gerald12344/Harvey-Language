@@ -1,11 +1,12 @@
 // Harvey Randall 2020-2022, Coge Generator to create the js codes
 
-import { readFileSync } from 'fs';
+import { readdirSync, readFileSync } from 'fs';
 import { fetchPlugins } from '../utils/pluginManager';
 import { finalAST } from '../types/maintypes';
 import { CompiledOtherFiles } from '../utils/compilerOtherFiles';
 import { fetchLogger } from '../utils/logger';
 import { fetchSettings } from '../utils/settings';
+import { join } from 'path';
 
 // [Tranverser] -> [Compiler] -> [Bundler/Minification]
 
@@ -125,6 +126,9 @@ export function codeGenerator(node: finalAST): string | finalAST | string[] {
                     );
                     let response = CompiledOtherFiles(data);
                     return response;
+                case 'harvscript':
+                    let dataInputMain = readFileSync(join(__dirname + '../../../harv-script/index.harvey'), 'utf-8');
+                    return CompiledOtherFiles(dataInputMain);
                 case 'async':
                     return `async ${node?.arguments?.map((e) => codeGenerator(e as finalAST))}`;
                 case 'wait':

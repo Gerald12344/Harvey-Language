@@ -3,24 +3,25 @@ import { join } from 'path';
 import { dirname } from 'path/posix';
 
 function createFile(path: string, content: string) {
-    writeFileSync(join(dirname(require?.main?.filename || ''), path), content);
+    writeFileSync(path, content);
 }
 
 function createFolder(path: string) {
-    if (!existsSync(join(dirname(require?.main?.filename || ''), path))) {
-        mkdirSync(join(dirname(require?.main?.filename || ''), path));
+    if (!existsSync(path)) {
+        mkdirSync(path);
     }
 }
 
 export function createApp() {
-    createFolder('../src');
-    createFolder('../src/components');
-    createFolder('../src/pages');
-    createFolder('../src/public');
-    createFolder('../src/public/imports');
+    createFolder('../../../src');
+    createFolder('../../../dist');
+    createFolder('../../../src/components');
+    createFolder('../../../src/pages');
+    createFolder('../../../src/public');
+    createFolder('../../../src/public/imports');
 
     createFile(
-        '../src/public/index.harvey',
+        '../../../src/public/index.harvey',
         `<!-- 
     This project was made using .Harvey, a framework and language created and developer by Harvey Randall
     https://www.github.com/Gerald12344
@@ -46,7 +47,7 @@ export function createApp() {
 </html>`,
     );
     createFile(
-        '../src/public/index.css',
+        '../../../src/public/index.css',
         `@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
     .nav-button{
         background-color: #4CAF50; /* Green */
@@ -71,5 +72,39 @@ export function createApp() {
     .hidden_tag{
         display: none;
     }`,
+    );
+
+    createFile(
+        '../../../harveySettings.json',
+        `
+{
+    "debug": true,
+    "version": "v1",
+    "evalOnCompile": false,
+    
+    "outputFolder": "dist",
+    "outputFileName": "index.js",
+    "inputFolder": "src",
+    "inputFile": "index.harvey",
+    "debugFile": true,
+    "debugFileName": "debug.js",
+    "debugFileLocation": "debug",
+    "obuscateOutput": true,
+    
+    "pluginsFolder": "packages/plugins",
+    "pluginsSettings": "plugins.json",
+    "packagesFolder": "packages",
+    
+    "dev": true,
+    "watchmode": true,
+    
+    "browserify": true,
+    
+    "dependencies": {
+        "Basic-Control": "^1.0",
+        "harv-script-5": "^1.0",
+        "HarveyScript-Framework": "^1.0"
+    }
+}`,
     );
 }

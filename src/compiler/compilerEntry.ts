@@ -1,8 +1,6 @@
 import browserify = require('browserify');
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { obfuscate } from 'javascript-obfuscator';
-import { relative } from 'path';
-import { basename, dirname, join } from 'path/posix';
 import { fetchLogger } from '../utils/logger';
 import { loadPlugins } from '../utils/pluginManager';
 import { fetchSettings } from '../utils/settings';
