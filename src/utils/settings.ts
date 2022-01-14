@@ -34,7 +34,7 @@ export function loadSettings(settingsIn: settings | undefined) {
 export function lookforSettings() {
     let data: settings | undefined;
     try {
-        let inputdata = readFileSync('harveySettings.json', 'utf8');
+        let inputdata = readFileSync(join(__dirname, '../../../../harveySettings.json'), 'utf8');
         data = JSON.parse(inputdata) as settings;
     } catch {}
     loadSettings(data);

@@ -53,7 +53,9 @@ let setupCompiler = () => {
                 .replace(/%public%/g, `./public`)
                 .replace(/<!-- {{%Bundle%}} -->/g, `<script src="./packages/HarvScript_Bundle_1.js"></script>`);
 
-            text = text + readFileSync(`./compiler/devfiles.html`, 'utf8');
+            let fileLocation = join(__dirname, '../../harv-script/devfiles.html');
+            console.log(__dirname);
+            text = text + readFileSync(fileLocation, 'utf8');
 
             if (!existsSync(`${settings.outputFolder}/public`)) {
                 mkdirSync(`${settings.outputFolder}/public`);
@@ -73,7 +75,7 @@ let setupCompiler = () => {
             }
             dir.closeSync();
 
-            app.use(express.static(join(__dirname, `../dist`)));
+            app.use(express.static(join(__dirname, '../../../../dist')));
 
             app.get('/api/lastupdate', (req, res) => {
                 res.send(`${lastUpdate}`);
@@ -84,7 +86,7 @@ let setupCompiler = () => {
             });
 
             app.get('*', (req, res) => {
-                res.sendFile(join(__dirname, `../${settings.outputFolder}/index.html`));
+                res.sendFile(join(__dirname, '../../../../index.html'));
             });
         }
     });
@@ -92,6 +94,8 @@ let setupCompiler = () => {
 
 export function watchChangesWithWebServer() {
     const settings = fetchSettings();
+
+    setupCompiler();
 
     var watcher = watch(`./${settings.inputFolder}`, {
         ignored: /^\./,

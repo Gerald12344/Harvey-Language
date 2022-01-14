@@ -1,6 +1,6 @@
 {
   "name": "harvey-language",
-  "version": "1.0.5",
+  "version": "1.0.20",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,9 @@
     "dev": "npm run build && npm run start"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "HS5/**/*",
+    "harv-script/**/*"
   ],
   "keywords": [],
   "author": "",
