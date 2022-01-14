@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
+import { fetchLogger } from './logger';
 
 function createFile(path: string, content: string) {
     writeFileSync(path, content);
@@ -12,6 +13,10 @@ function createFolder(path: string) {
 }
 
 export function createApp() {
+    let logger = fetchLogger();
+
+    logger?.log('info', 'Creating app...');
+
     createFolder(join(__dirname, '../../../../src'));
     createFolder(join(__dirname, '../../../../dist'));
     createFolder(join(__dirname, '../../../../src/components'));
@@ -100,4 +105,106 @@ export function createApp() {
     "browserify": true
 }`,
     );
+
+    createFile(
+        join(__dirname, '../../../../src/index.harvey'),
+        `
+<comment <string " Add Harv-script ">>
+<harvscript>
+
+<hookFunction Clock <body
+    <letsmake <split time usetime> <useHook <string "Loading!">>>
+    <letsmake starttime <new Date>>
+
+    <function formatClock <body
+        <comment "Time globals">
+        <letsmake time <new Date>>
+
+        <letsmake hour <call time.getHours>>
+        <letsmake min <call time.getMinutes>>
+        <letsmake sec <call time.getSeconds>>
+
+        <letsmake hoursString <toString hour>>
+        <letsmake hourSplit <call hoursString.split <string "">>>
+
+        <if <equal hourSplit.length 1> <body
+            <assign hour <add <string "0"> <var hour>>>
+        >>
+        
+        
+        <letsmake minString <toString min>>
+        <letsmake minSplit <call minString.split <string "">>>
+
+        <if <equal minSplit.length 1> <body
+            <assign min <add <string "0"> <var min>>>
+        >>
+
+
+        <letsmake secString <toString sec>>
+        <letsmake secSplit <call secString.split <string "">>>
+
+        <if <equal secSplit.length 1> <body
+            <assign sec <add <string "0"> <var sec>>>
+        >>
+        
+        <letsmake outputArray <array <var hour> <string ":"> <var min> <string ":"> <var sec>>>
+
+        <reply <call outputArray.join <string "">>>
+
+    >>
+
+
+    <useUpdate <Arrowfunc <body
+        <call usetime <call formatClock>>
+        <letsmake updateloop <interval <Arrowfunc <body
+            <call usetime <call formatClock>>
+        >> 1000>>
+
+        <reply <Arrowfunc <body
+            <call clearInterval updateloop>
+        >>>
+    >> <array>>
+
+    <render <string "body">
+        <div <empty> <string "clock-div">
+        <hOne <string "Welcome to Havscript Create app!"> <string "Clock">>
+            <hOne <string "The current time is:"> <string "Clock">>
+
+            <hOne <var time> <string "clock-numbers">>
+
+            <hOne <array <string "You current timezone is: GMT+"> <call starttime.getTimezoneOffset>> <string "Clock">>
+
+            <style <scss "
+                .clock-div{
+                    display:flex;
+                    justify-content: center;
+                    width: 100vw;
+                    height: 90vh;
+                    flex-direction: column;
+
+                    .Clock {
+                        color: #ffffff;
+                        text-align: center;
+                        font-size: 40px;
+                    }
+                    .clock-numbers {
+                        font-size: 150px;
+                        color: #ffffff;
+                        font-family: monospace;
+                        text-align: center;
+                    }
+                }
+                body{
+                    padding: 0;
+                    margin:0;
+                }
+            "> <empty>>
+        >
+    >
+>>
+
+<call Clock>`,
+    );
+
+    logger?.log('info', 'Your app is ready to go! Just use "npx harvey-language watch" to start the server');
 }
