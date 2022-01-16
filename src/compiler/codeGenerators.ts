@@ -127,7 +127,10 @@ export function codeGenerator(node: finalAST): string | finalAST | string[] {
                     let response = CompiledOtherFiles(data);
                     return response;
                 case 'harvscript':
-                    let dataInputMain = readFileSync(join(__dirname + '../../../harv-script/index.harvey'), 'utf-8');
+                    let dataInputMain = readFileSync(
+                        join(__dirname + '../../../packages/harv-script/index.harvey'),
+                        'utf-8',
+                    );
                     return CompiledOtherFiles(dataInputMain);
                 case 'async':
                     return `async ${node?.arguments?.map((e) => codeGenerator(e as finalAST))}`;
@@ -230,7 +233,7 @@ export function codeGenerator(node: finalAST): string | finalAST | string[] {
                     return `delete ${node?.arguments?.map((e) => codeGenerator(e as finalAST))?.join('')}`;
                 case 'package':
                     let dataIn = readFileSync(
-                        settings.packagesFolder +
+                        settings.inBuiltPackagesFolder +
                             '/' +
                             (node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string).replace('"', '') +
                             '/index.harvey'.replace('"', ''),
@@ -240,7 +243,7 @@ export function codeGenerator(node: finalAST): string | finalAST | string[] {
                     return response2;
                 case 'pluginFetch':
                     let dataIn3 = readFileSync(
-                        settings.packagesFolder +
+                        settings.inBuiltPackagesFolder +
                             '/' +
                             (node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string)
                                 .replace('"', '')

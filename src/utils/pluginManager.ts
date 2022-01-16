@@ -11,7 +11,7 @@ let commands: {
 
 export function loadPlugins() {
     let settings = fetchSettings();
-    if (settings.pluginsFolder === '' || settings.pluginsFolder === '' || settings.packagesFolder === '') return;
+    if (settings.pluginsFolder === '' || settings.pluginsFolder === '' || settings.inBuiltPackagesFolder === '') return;
 
     let pluginSettings = require(`../${settings.pluginsFolder}/${settings.pluginsSettings}`);
     pluginSettings.plugins.forEach((element: customPlugin) => {
@@ -20,7 +20,7 @@ export function loadPlugins() {
 }
 
 export function loadHarvScript() {
-    let pathIn = path.join(__dirname + '../../../HS5');
+    let pathIn = path.join(__dirname + '../../../packages/HS5');
     let harvscript = require(pathIn + `/plugins.json`);
 
     harvscript.plugins.forEach((element: customPlugin) => {

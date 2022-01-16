@@ -4,9 +4,16 @@
         "module": "commonjs",
         "declaration": true,
         "outDir": "./lib",
-        "strict": true
+        "strict": true,
+        "esModuleInterop": true,
     },
-    "include": ["src", "HS5"],
-    "exclude": ["node_modules", "**/__tests__/*"],
+    "include": [
+        "src",
+        "HS5"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/__tests__/*"
+    ],
     "allowJs": true
 }

@@ -1,6 +1,8 @@
-import browserify = require('browserify');
+import browserify from 'browserify';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { obfuscate } from 'javascript-obfuscator';
+import { join } from 'path';
+import { createFolder } from '../utils/createApp';
 import { fetchLogger } from '../utils/logger';
 import { loadPlugins } from '../utils/pluginManager';
 import { fetchSettings } from '../utils/settings';
@@ -118,7 +120,11 @@ export async function compileFile(fileDirec: string, direc = false) {
 
     if (settings.debugFile === true) {
         try {
-            writeFileSync(`./${settings.outputFolder}/${settings.debugFileLocation}/${settings.debugFileName}`, output);
+            createFolder(join(`./${settings.outputFolder}`, `/${settings.debugFileLocation}`));
+            writeFileSync(
+                join(`./${settings.outputFolder}`, `/${settings.debugFileLocation}`, `/${settings.debugFileName}`),
+                output,
+            );
         } catch {
             logger?.log('error', 'Yikes, Error writing to debug file.');
             process.exit(1);

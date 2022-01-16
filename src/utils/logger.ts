@@ -1,5 +1,5 @@
 import { createLogger, Logger } from 'winston';
-import TransportStream = require('winston-transport');
+import TransportStream from 'winston-transport';
 const Transport = require('winston-transport');
 
 // Levels to make it beautiful!!!

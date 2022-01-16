@@ -1,17 +1,58 @@
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import { join } from 'path';
-import { fetchLogger } from './logger';
+import { existsSync, fstat, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs';
+import { join, relative } from 'path';
+import { chalkClass } from './chalk';
+import { ensureDirectoryExistence, getAllFiles } from './walkThroughDir';
 
 function createFile(path: string, content: string) {
     writeFileSync(path, content);
 }
 
-function createFolder(path: string) {
+export function createFolder(path: string) {
     if (!existsSync(path)) {
         mkdirSync(path);
     }
 }
 
+export async function createApp(dirName: string) {
+    dirName = join(dirName, '../');
+    let walk = getAllFiles(join(__dirname, `../../template`), [], dirName);
+
+    let files = walk.map((e) => {
+        return {
+            name: join(dirName, e.name.replace(/\/\//g, '/').replace(join(__dirname, `../../template`), '')),
+            value: e.value,
+        };
+    });
+    files.forEach((e) => {
+        try {
+            try {
+                ensureDirectoryExistence(join(e.name, '../'));
+            } catch {}
+
+            createFile(e.name.replace(/\/\//g, '/'), e.value);
+        } catch (err) {
+            console.log(err);
+        }
+    });
+
+    try {
+        let json = readFileSync(join(__dirname, `../../template/package.json`), 'utf-8');
+        writeFileSync(
+            join(dirName, 'package.json'),
+            JSON.stringify({
+                ...JSON.parse(json),
+                scripts: {
+                    start: 'npx harvey-language watch',
+                    build: 'npx harvey-language compile',
+                },
+            }),
+        );
+    } catch {
+        console.log(new chalkClass().redBold('no package.json'));
+    }
+}
+
+/*
 export function createApp() {
     let logger = fetchLogger();
 
@@ -54,7 +95,7 @@ export function createApp() {
         join(__dirname, '../../../../src/public/imports/index.css'),
         `@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
     .nav-button{
-        background-color: #4CAF50; /* Green */
+        background-color: #4CAF50; 
         border: none;
         color:white;
         padding: 15px 32px;
@@ -97,7 +138,7 @@ export function createApp() {
     
     "pluginsFolder": "",
     "pluginsSettings": "",
-    "packagesFolder": "./node_modules/harvey-language/harv-script",
+    "inBuiltPackagesFolder": "./node_modules/harvey-language/harv-script",
     
     "dev": true,
     "watchmode": true,
@@ -208,3 +249,4 @@ export function createApp() {
 
     logger?.log('info', 'Your app is ready to go! Just use "npx harvey-language watch" to start the server');
 }
+*/

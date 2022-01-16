@@ -1,10 +1,11 @@
 import { watch } from 'chokidar';
 import { fetchLogger } from './logger';
 import { fetchSettings } from './settings';
-import * as express from 'express';
+import express from 'express';
 import { existsSync, mkdirSync, opendirSync, readFile, readFileSync, writeFileSync } from 'fs';
 import { compileFile } from '../compiler/compilerEntry';
 import { join } from 'path/posix';
+import { resolve } from 'path';
 
 let lastUpdate = Date.now();
 let compileStartTime = Date.now();
@@ -48,34 +49,34 @@ let setupCompiler = () => {
         }
         lastUpdate = Date.now();
         if (settings.dev === true) {
-            let text = readFileSync(`./${settings.inputFolder}/public/index.html`, 'utf8')
+            let text = readFileSync(join(resolve('./'), `./${settings.inputFolder}/public/index.html`), 'utf8')
                 .replace(/%build%/g, `${settings.outputFileName}`)
                 .replace(/%public%/g, `./public`)
                 .replace(/<!-- {{%Bundle%}} -->/g, `<script src="./packages/HarvScript_Bundle_1.js"></script>`);
 
-            let fileLocation = join(__dirname, '../../harv-script/devfiles.html');
-            console.log(__dirname);
+            let fileLocation = join(settings.inBuiltPackagesFolder, '/devfiles.html');
+
             text = text + readFileSync(fileLocation, 'utf8');
 
-            if (!existsSync(`${settings.outputFolder}/public`)) {
-                mkdirSync(`${settings.outputFolder}/public`);
+            if (!existsSync(join(resolve('./'), `${settings.outputFolder}/public`))) {
+                mkdirSync(join(resolve('./'), `${settings.outputFolder}/public`));
             }
 
             //fs.writeFileSync(`./${settings.outputFolder}/devfiles.js`, fs.readFileSync(`./compiler/devfiles.js`, 'utf8'));
 
-            writeFileSync(`./${settings.outputFolder}/index.html`, text.replace(/\r?\n|\r/g, ''));
+            writeFileSync(join(resolve('./'), `${settings.outputFolder}/index.html`), text.replace(/\r?\n|\r/g, ''));
 
             const dir = opendirSync(`${settings.inputFolder}/public/imports`);
             let dirent;
             while ((dirent = dir.readSync()) !== null) {
                 writeFileSync(
                     `./${settings.outputFolder}/public/${dirent.name}`,
-                    readFileSync(`${settings.inputFolder}/public/imports/${dirent.name}`, 'utf-8'),
+                    readFileSync(join(resolve('./'), `${settings.inputFolder}/public/imports/${dirent.name}`), 'utf-8'),
                 );
             }
             dir.closeSync();
 
-            app.use(express.static(join(__dirname, '../../../../dist')));
+            app.use(express.static(join(resolve('./'), `${settings.outputFolder}`)));
 
             app.get('/api/lastupdate', (req, res) => {
                 res.send(`${lastUpdate}`);
@@ -86,7 +87,7 @@ let setupCompiler = () => {
             });
 
             app.get('*', (req, res) => {
-                res.sendFile(join(__dirname, '../../../../index.html'));
+                res.sendFile(join(resolve('./'), `${settings.outputFolder}/index.html`));
             });
         }
     });
