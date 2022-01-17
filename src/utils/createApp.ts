@@ -138,7 +138,6 @@ export function createApp() {
     
     "pluginsFolder": "",
     "pluginsSettings": "",
-    "inBuiltPackagesFolder": "./node_modules/harvey-language/harv-script",
     
     "dev": true,
     "watchmode": true,

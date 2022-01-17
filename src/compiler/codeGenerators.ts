@@ -6,7 +6,7 @@ import { finalAST } from '../types/maintypes';
 import { CompiledOtherFiles } from '../utils/compilerOtherFiles';
 import { fetchLogger } from '../utils/logger';
 import { fetchSettings } from '../utils/settings';
-import { join } from 'path';
+import { join, relative } from 'path';
 
 // [Tranverser] -> [Compiler] -> [Bundler/Minification]
 
@@ -128,7 +128,7 @@ export function codeGenerator(node: finalAST): string | finalAST | string[] {
                     return response;
                 case 'harvscript':
                     let dataInputMain = readFileSync(
-                        join(__dirname + '../../../packages/harv-script/index.harvey'),
+                        join(__dirname, '../../packages/harv-script/index.harvey'),
                         'utf-8',
                     );
                     return CompiledOtherFiles(dataInputMain);
@@ -233,21 +233,25 @@ export function codeGenerator(node: finalAST): string | finalAST | string[] {
                     return `delete ${node?.arguments?.map((e) => codeGenerator(e as finalAST))?.join('')}`;
                 case 'package':
                     let dataIn = readFileSync(
-                        settings.inBuiltPackagesFolder +
-                            '/' +
+                        join(
+                            __dirname,
+                            '../../../packages/harv-script',
+                            '/',
                             (node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string).replace('"', '') +
-                            '/index.harvey'.replace('"', ''),
+                                '/index.harvey'.replace('"', ''),
+                        ),
                         'utf-8',
                     );
                     let response2 = CompiledOtherFiles(dataIn);
                     return response2;
                 case 'pluginFetch':
                     let dataIn3 = readFileSync(
-                        settings.inBuiltPackagesFolder +
-                            '/' +
-                            (node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string)
-                                .replace('"', '')
-                                .replace('"', ''),
+                        join(
+                            __dirname,
+                            '../../packages/harv-script',
+                            '/',
+                            (node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string).replace('"', ''),
+                        ),
                         'utf-8',
                     );
                     let response3 = CompiledOtherFiles(dataIn3);

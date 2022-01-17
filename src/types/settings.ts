@@ -14,7 +14,6 @@ export interface settings {
 
     pluginsFolder: string;
     pluginsSettings: string;
-    inBuiltPackagesFolder: string;
 
     dev: boolean;
 

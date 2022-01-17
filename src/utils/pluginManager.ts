@@ -11,7 +11,7 @@ let commands: {
 
 export function loadPlugins() {
     let settings = fetchSettings();
-    if (settings.pluginsFolder === '' || settings.pluginsFolder === '' || settings.inBuiltPackagesFolder === '') return;
+    if (settings.pluginsFolder === '' || settings.pluginsFolder === '') return;
 
     let pluginSettings = require(`../${settings.pluginsFolder}/${settings.pluginsSettings}`);
     pluginSettings.plugins.forEach((element: customPlugin) => {

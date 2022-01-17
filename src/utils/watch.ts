@@ -4,8 +4,7 @@ import { fetchSettings } from './settings';
 import express from 'express';
 import { existsSync, mkdirSync, opendirSync, readFile, readFileSync, writeFileSync } from 'fs';
 import { compileFile } from '../compiler/compilerEntry';
-import { join } from 'path/posix';
-import { resolve } from 'path';
+import { resolve, join } from 'path';
 
 let lastUpdate = Date.now();
 let compileStartTime = Date.now();
@@ -54,7 +53,7 @@ let setupCompiler = () => {
                 .replace(/%public%/g, `./public`)
                 .replace(/<!-- {{%Bundle%}} -->/g, `<script src="./packages/HarvScript_Bundle_1.js"></script>`);
 
-            let fileLocation = join(settings.inBuiltPackagesFolder, '/devfiles.html');
+            let fileLocation = join(__dirname, '../../packages/harv-script/devfiles.html');
 
             text = text + readFileSync(fileLocation, 'utf8');
 

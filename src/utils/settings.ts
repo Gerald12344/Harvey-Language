@@ -22,7 +22,6 @@ export function loadSettings(settingsIn: settings | undefined) {
             inputFile: '',
             inputFolder: '',
             obuscateOutput: true,
-            inBuiltPackagesFolder: join(__dirname, '../../harv-script'),
             pluginsFolder: '',
             pluginsSettings: '',
         };
