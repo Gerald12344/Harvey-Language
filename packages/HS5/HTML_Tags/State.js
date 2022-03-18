@@ -1,6 +1,6 @@
 module.exports = {
     Command: function (input) {
-        return `useHook(${input[0]})`;
+        return `const [${input[0]},${input[1]}] = useHook(${input[2]}`;
     },
     Dependencies: function () {
         return false;

@@ -152,6 +152,10 @@
         "case": "footer",
         "file": "HTML_Tags/footer.js"
       },
+      {
+        "case": "image",
+        "file": "HTML_Tags/image.js"
+      },
 
       {
         "case": "useUpdate",
@@ -164,6 +168,10 @@
       {
         "case": "usePortal",
         "file": "HTML_Tags/componentBoolean.js"
+      },
+      {
+        "case": "state",
+        "file": "HTML_Tags/State.js"
       },
       {
         "case": "hookFunction",

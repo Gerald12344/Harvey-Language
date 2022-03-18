@@ -10,6 +10,10 @@
     >>
     <letsmake Root document.body>
     <assign Root.innerHTML <string "">>
+    
+    <comment "lets just prevent any memory leaks">
+    <assign componentHashTree <object>>
+    <assign hooks <array>>
 
     <call history.pushState <string ""> <string ""> <var body>>
 
