@@ -23,6 +23,7 @@
         "packages/**/*",
         "template/**/*"
     ],
+    "readme": "README.md",
     "keywords": [],
     "author": "Harvey Randall",
     "license": "ISC",
