@@ -17,7 +17,7 @@
 >>
 
 <function booleanComponentRendering boolean component variables <body
-    <letmake cleanup <undefined>>
+    <letsmake cleanup <undefined>>
     <letsmake rendered <false>>
     <function updateSettingsCycle <body
         <if <equal boolean.aInternal <true>> <body
