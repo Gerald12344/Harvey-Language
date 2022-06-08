@@ -11,9 +11,7 @@ module.exports = {
             secondPart = `((parent) => {${Children}})(InternalUUID)`;
         }
 
-        return `(() => {let InternalUUID = uuidv4(); let ElementWeWant = ReactfulElement('button',${Parent},parent, InternalUUID, ${
-            '_INTERNAL_UUID_USED_FOR_STYLES_' + className
-        }); ${
+        return `(() => {let InternalUUID = uuidv4(); let ElementWeWant = ReactfulElement('button',${Parent},parent, InternalUUID, ${className}); ${
             typeof clickCallback !== 'undefined'
                 ? `ElementWeWant.Element.addEventListener("click", function(e) {${clickCallback}; }); `
                 : ''

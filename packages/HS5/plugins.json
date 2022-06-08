@@ -176,6 +176,10 @@
       {
         "case": "hookFunction",
         "file": "HTML_Tags/hookFunction.js"
+      },
+      {
+        "case": "moduleLock",
+        "file": "HTML_Tags/moduleLocked.js"
       }
 
     ]

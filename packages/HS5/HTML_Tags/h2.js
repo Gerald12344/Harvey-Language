@@ -11,7 +11,7 @@ module.exports = {
             secondPart = `((parent) => {${Children}})(InternalUUID)`;
         }
         return `(() => {let InternalUUID = uuidv4(); let ElementWeWant = ReactfulElement('h2',${Parent},parent, InternalUUID, ${
-            '_INTERNAL_UUID_USED_FOR_STYLES_' + className
+            className
         }); components.push(ElementWeWant); ${secondPart}})();`;
     },
     Dependencies: function () {

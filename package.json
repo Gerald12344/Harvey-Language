@@ -1,6 +1,6 @@
 {
     "name": "harvey-language",
-    "version": "1.1.7",
+    "version": "1.2.2",
     "description": ".harvey is a transpilled language with a bundled version of the Harvey framework, this is a WIP project, for me to learn about complation.",
     "main": "index.js",
     "scripts": {
@@ -22,9 +22,7 @@
         "packages/**/*",
         "template/**/*"
     ],
-    "publishConfig": {
-        "registry":"https://npm.pkg.github.com"
-    },
+    
     "readme": "README.md",
     "keywords": [],
     "author": "Harvey Randall",
