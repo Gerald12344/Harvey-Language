@@ -3,6 +3,7 @@
 import { loadHarvScript } from './utils/pluginManager';
 import { CompiledOtherFiles } from './utils/compilerOtherFiles';
 import { CreateMainLogger } from './utils/logger';
+import { ChalkClass } from './utils/chalk';
 
 // (c) - Harvey Randall 2020-2022
 
@@ -10,6 +11,30 @@ import { CreateMainLogger } from './utils/logger';
 
 loadHarvScript();
 CreateMainLogger();
+
+let Chalk = new ChalkClass();
+
+interface Options {
+    port?: number;
+    SSR?: boolean;
+    injectJS?: boolean;
+    server: 
+}
+
+export default function app(options: Options) {
+    let { port, SSR, injectJS } = options;
+
+    if (port === undefined || port < 0 || port > 65535) {
+        Chalk.red('Port not specified or outside of range 0-65535!');
+        port = 3000;
+    }
+    if (SSR === undefined) {
+        SSR = true;
+    }
+    if (injectJS === undefined) {
+        injectJS = true;
+    }
+}
 
 console.log(
     CompiledOtherFiles(`<function GlobalCSS Mainparent <body

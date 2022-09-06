@@ -9,7 +9,8 @@
     },
     "include": [
         "src",
-        "HS5"
+        "HS5",
+        "end2end"
     ],
     "exclude": [
         "node_modules",
