@@ -4,7 +4,7 @@ import checkForUpdate from 'update-check';
 import prompts from 'prompts';
 import { validateNpmName } from './utils/checkNpmName';
 import { basename, resolve } from 'path';
-import { chalkClass } from './utils/chalk';
+import { ChalkClass } from './utils/chalk';
 import { compileFile } from './compiler/compilerEntry';
 import { createApp } from './utils/createApp';
 import { CreateMainLogger } from './utils/logger';
@@ -18,7 +18,7 @@ CreateMainLogger();
 loadHarvScript();
 
 let projectPath: string = '';
-let chalk = new chalkClass();
+let chalk = new ChalkClass();
 
 program
     .command('compile')
@@ -112,7 +112,6 @@ async function run(): Promise<void> {
         process.exit(1);
     }
 
-    console.log(resolvedProjectPath);
     createApp(resolvedProjectPath);
 }
 

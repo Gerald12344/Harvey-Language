@@ -82,21 +82,28 @@
         >>
         <letsmake Element <call element <var ElementType> <var reactVar> <var UUID> <var parent> <var ClassName.aInternal>>>
         <letsmake returnObj <object>>
+   
 
         <if <call Array.isArray ClassName> <body
             <letsmake text <call generateStringFromReactVar ClassName>>
-            <assign Element.className text>
+            <if <equal <typeof Hydration> <string "undefined">> <body
+                <assign Element.className text>
+            >>
             <call reactfulClassVars.forEach <Arrowfunc e <body
                 <MultiState e <Arrowfunc value <body
                     <letsmake text <call generateStringFromReactVar ClassName>>
-                    <assign Element.className text>
+                    <if <equal <typeof Hydration> <string "undefined">> <body
+                        <assign Element.className text>
+                    >>
                 >>>
             >>>
         >>
         <if <equal <call Array.isArray ClassName> <false>> <body
             <if <and <equal <string "object"> <typeof ClassName> > <notequal <var ClassName.aListener> <undefined>>> <body
                 <MultiState ClassName <Arrowfunc value <body
-                    <assign Element.className value>
+                    <if <equal <typeof Hydration> <string "undefined">> <body
+                        <assign Element.className value>
+                    >>
                 >>>
             >>
         >>
@@ -113,40 +120,54 @@
     <if <call Array.isArray reactVar> <body
         <letsmake text <call generateStringFromReactVar reactVar>>
         <assign Element <call element <var ElementType> <var text> <var UUID> <var parent> <var ClassName.aInternal>>>
+
+
         <call reactfulVars.forEach <Arrowfunc e <body
             <MultiState e <Arrowfunc value <body
                 <letsmake text <call generateStringFromReactVar reactVar>>
-                <assign Element.innerHTML text>
+                <if <equal <typeof Hydration> <string "undefined">> <body
+                    <assign Element.innerHTML text>
+                >>
             >>>
         >>>
     >>
     <if <equal <call Array.isArray reactVar> <false>> <body
         <assign Element <call element <var ElementType> <var reactVar.aInternal> <var UUID> <var parent> <var ClassName.aInternal>>>
         <MultiState reactVar <Arrowfunc value <body
-            <assign Element.innerHTML value>
+            <if <equal <typeof Hydration> <string "undefined">> <body
+                <assign Element.innerHTML value>
+            >>
         >>>
     >>
 
     <if <call Array.isArray ClassName> <body
         <letsmake text <call generateStringFromReactVar ClassName>>
-        <assign Element.className text>
+        <if <equal <typeof Hydration> <string "undefined">> <body
+            <assign Element.className text>
+        >>
         <call reactfulClassVars.forEach <Arrowfunc e <body
             <MultiState e <Arrowfunc value <body
                 <letsmake text <call generateStringFromReactVar ClassName>>
-                <assign Element.className text>
+                <if <equal <typeof Hydration> <string "undefined">> <body
+                    <assign Element.className text>
+                >>
             >>>
         >>>
     >>
     <if <equal <call Array.isArray ClassName> <false>> <body
         <if <and <equal <string "object"> <typeof ClassName> > <notequal <var ClassName.aListener> <undefined>>> <body
             <MultiState ClassName <Arrowfunc value <body
-                <assign Element.className value>
+                <if <equal <typeof Hydration> <string "undefined">> <body
+                    <assign Element.className value>
+                >>
             >>>
         >>
     >>
 
     <if <equal <string "string"> <typeof ClassName>>  <body
-        <assign Element.className ClassName>
+        <if <equal <typeof Hydration> <string "undefined">> <body
+            <assign Element.className ClassName>
+        >>
     >>
 
     <letsmake returnObj <object>>

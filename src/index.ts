@@ -4,6 +4,12 @@ import { loadHarvScript } from './utils/pluginManager';
 import { CompiledOtherFiles } from './utils/compilerOtherFiles';
 import { CreateMainLogger } from './utils/logger';
 import { ChalkClass } from './utils/chalk';
+import { Express } from 'express';
+import { fetchSettings, loadSettings, lookforSettings } from './utils/settings';
+import { SetupUpProdApp } from './prod/webApp';
+import { compileFile } from './compiler/compilerEntry';
+import { injectHTML, SetupSSR } from './prod/SSR_Utils';
+import { readFileSync } from 'fs';
 
 // (c) - Harvey Randall 2020-2022
 
@@ -11,6 +17,28 @@ import { ChalkClass } from './utils/chalk';
 
 loadHarvScript();
 CreateMainLogger();
+//lookforSettings();
+loadSettings({
+    debug: true,
+    version: 'v1',
+    evalOnCompile: false,
+
+    outputFolder: 'dist',
+    outputFileName: 'index.js',
+    inputFolder: 'src',
+    inputFile: 'index.harvey',
+    debugFile: true,
+    debugFileName: 'debug.js',
+    debugFileLocation: 'dist',
+    obuscateOutput: true,
+
+    pluginsFolder: '',
+    pluginsSettings: '',
+
+    dev: true,
+
+    browserify: true,
+});
 
 let Chalk = new ChalkClass();
 
@@ -18,11 +46,12 @@ interface Options {
     port?: number;
     SSR?: boolean;
     injectJS?: boolean;
-    server: 
+    server: Express;
 }
 
-export default function app(options: Options) {
-    let { port, SSR, injectJS } = options;
+export default async function app(options: Options) {
+    let { port, SSR, injectJS, server } = options;
+    let settings = fetchSettings();
 
     if (port === undefined || port < 0 || port > 65535) {
         Chalk.red('Port not specified or outside of range 0-65535!');
@@ -34,38 +63,11 @@ export default function app(options: Options) {
     if (injectJS === undefined) {
         injectJS = true;
     }
+
+    let HTML = SetupUpProdApp({ app: server, port });
+
+    let code = await compileFile(`./${settings.inputFolder}/${settings.inputFile}`);
+
+    SetupSSR(code);
+    injectHTML(server, HTML);
 }
-
-console.log(
-    CompiledOtherFiles(`<function GlobalCSS Mainparent <body
-<render <var Mainparent>
-    <style <string "
-        .nav-button{
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color:white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            cursor: pointer;
-            outline: none;
-        }
-        .nav-button:hover {
-            background-color: #3e8e41;
-            }
-        body{
-            border:0;
-        }
-        .hidden_tag{
-            display: none;
-        }
-        /* Yikes this handles the small text */
-        .downabit{
-            transform: translate(0,100%);
-        }
-
-    "> <empty>>
->
->>`),
-);

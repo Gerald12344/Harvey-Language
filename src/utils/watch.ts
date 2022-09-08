@@ -61,8 +61,6 @@ let setupCompiler = () => {
                 mkdirSync(join(resolve('./'), `${settings.outputFolder}/public`));
             }
 
-            //fs.writeFileSync(`./${settings.outputFolder}/devfiles.js`, fs.readFileSync(`./compiler/devfiles.js`, 'utf8'));
-
             writeFileSync(join(resolve('./'), `${settings.outputFolder}/index.html`), text.replace(/\r?\n|\r/g, ''));
 
             const dir = opendirSync(`${settings.inputFolder}/public/imports`);

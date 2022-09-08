@@ -41,6 +41,8 @@
 >>
 
 <function RouterPoint location exact component <body
+
+
   <if exact <body
     <if <equal window.location.pathname <var location>> <body
       <call OpenFuns.push <call component>>

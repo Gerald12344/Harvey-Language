@@ -1,6 +1,6 @@
 {
     "name": "harvey-language",
-    "version": "1.2.2",
+    "version": "1.2.13",
     "description": ".harvey is a transpilled language with a bundled version of the Harvey framework, this is a WIP project, for me to learn about complation.",
     "main": "index.js",
     "scripts": {
@@ -13,7 +13,9 @@
         "prepublishOnly": "npm test",
         "version": "npm run format && git add -A src",
         "postversion": "git push && git push --tags",
-        "dev": "npm run build && npm run start"
+        "dev": "npm run build && npm run start",
+        "testSuite": "npm run build && cd tests && node Runner.js",
+        "prodTest": "npm run build && cd tests && node prod.js"
     },
     "repository": "github:Gerald12344/Harvey-Language",
     "files": [
@@ -22,7 +24,6 @@
         "packages/**/*",
         "template/**/*"
     ],
-    
     "readme": "README.md",
     "keywords": [],
     "author": "Harvey Randall",
@@ -32,6 +33,7 @@
         "@types/express": "^4.17.13",
         "@types/jest": "^27.4.0",
         "@types/node": "^17.0.8",
+        "@types/parseurl": "^1.3.1",
         "@types/prompts": "^2.0.14",
         "@types/validate-npm-package-name": "^3.0.3",
         "jest": "^27.4.7",

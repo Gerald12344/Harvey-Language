@@ -1,0 +1,31 @@
+<function homepage <body
+
+    <render <string "body">
+        <hOne <string "Welcome to .harvey playground!"> <string "Welcome">>
+
+        <hTwo <string "Where I will put all the projects I have been working on">>
+
+        <hThree <string "Here is a list of all pages so far!">>
+        <ul <empty> <string "list">
+            <li <empty> <empty> <a <string "Tic Tac Toe!"> <empty> <string "tictactoe">>>
+            <li <empty> <empty> <a <string "Clock!"> <empty> <string "clock">>>
+            <li <empty> <empty> <a <string "Calculator!"> <empty> <string "calculator">>>
+        >
+        
+        <style <scss "
+            .Welcome {
+                color: #00a8ff;
+            }
+            .list {
+                button {
+                    font-size:20px;
+                    background-color: #2f3640;
+                    cursor:pointer;
+                    text-decoration: underline;
+                    border: 0px solid;
+                    color: #00a8ff;
+                }
+            }
+        "> <empty>>
+    >
+>>

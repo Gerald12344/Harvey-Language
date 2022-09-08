@@ -133,7 +133,7 @@ export async function compileFile(fileDirec: string, direc = false) {
     let MainOut = output;
     if (settings.obuscateOutput) {
         if (settings.debug) {
-            logger?.log('warn', `Obuscating and minifying output!`);
+            logger?.log('warn', `Obfuscating and minifying output!`);
         }
         //console.log(Prepack.prepackSources([{filePath:'MainOutput', fileContents:JavaScriptObfuscator.obfuscate(output)}]))
         MainOut = obfuscate(output, {}) as unknown as string;
@@ -146,11 +146,11 @@ export async function compileFile(fileDirec: string, direc = false) {
         writeFileSync(
             `${settings.outputFolder}/${settings.outputFileName}`,
             headers.headers +
-                '\n* Harvey Programming Compiled Stuff, you touch you break \n* For lisencing and for copy right stuff please check the legal stuff below \n* This is the compiled file and is optimised and obuscated if you want to see the compiled source code look at CompiledJS.js \n* --[[Code will start soon I promise]]-- \n* Look away its hard to understand. \n*/\n' +
+                '\n* Harvey Programming Compiled Stuff, you touch you break \n* For licensing and for copy right stuff please check the legal stuff below \n* This is the compiled file and is optimised and obuscated if you want to see the compiled source code look at CompiledJS.js \n* --[[Code will start soon I promise]]-- \n* Look away its hard to understand. \n*/\n' +
                 MainOut,
         );
     } catch (err) {
-        logger?.log('error', 'Yikes, Error writing to ouput file.');
+        logger?.log('error', 'Yikes, Error writing to output file.');
         process.exit(1);
     }
     if (settings.debug) {

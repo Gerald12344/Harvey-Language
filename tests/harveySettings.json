@@ -1,0 +1,22 @@
+{
+    "debug": true,
+    "version": "v1",
+    "evalOnCompile": false,
+
+    "outputFolder": "dist",
+    "outputFileName": "index.js",
+    "inputFolder": "src",
+    "inputFile": "index.harvey",
+    "debugFile": true,
+    "debugFileName": "debug.js",
+    "debugFileLocation": "dist",
+    "obuscateOutput": true,
+
+    "pluginsFolder": "",
+    "pluginsSettings": "",
+
+    "dev": true,
+    "watchmode": true,
+
+    "browserify": true
+}

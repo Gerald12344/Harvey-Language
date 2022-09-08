@@ -10,9 +10,7 @@ module.exports = {
         if (Children !== '') {
             secondPart = `((parent) => {${Children}})(InternalUUID)`;
         }
-        return `(() => {let InternalUUID = uuidv4(); let ElementWeWant = ReactfulElement('h2',${Parent},parent, InternalUUID, ${
-            className
-        }); components.push(ElementWeWant); ${secondPart}})();`;
+        return `(() => {let InternalUUID = "${uuidv4()}"; let ElementWeWant = ReactfulElement('h2',${Parent},parent, InternalUUID, ${className}); components.push(ElementWeWant); ${secondPart}})();`;
     },
     Dependencies: function () {
         return false;

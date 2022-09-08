@@ -11,7 +11,7 @@ module.exports = {
         if (Children !== '') {
             secondPart = `((parent) => {${Children}})(InternalUUID)`;
         }
-        return `(() => {let InternalUUID = uuidv4(); let ElementWeWant = ReactfulElement('img',${Parent},parent, InternalUUID, ${className});  ElementWeWant.Element.src=${src}; components.push(ElementWeWant); ${secondPart}})();`;
+        return `(() => {let InternalUUID = "${uuidv4()}"; let ElementWeWant = ReactfulElement('img',${Parent},parent, InternalUUID, ${className});  ElementWeWant.Element.src=${src}; components.push(ElementWeWant); ${secondPart}})();`;
     },
     Dependencies: function () {
         return false;

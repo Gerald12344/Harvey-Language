@@ -8,7 +8,7 @@ let colours = {
     bold: '\x1b[1m',
 };
 
-export class chalkClass {
+export class ChalkClass {
     green(text: string): string {
         return colours.green + text + colours.text;
     }

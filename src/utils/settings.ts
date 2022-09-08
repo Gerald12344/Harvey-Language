@@ -5,6 +5,7 @@ import { settings } from '../types/settings';
 let settingsCurrent: settings;
 
 export function loadSettings(settingsIn: settings | undefined) {
+    if (settingsCurrent !== undefined) return;
     if (settingsIn === undefined) {
         let rootDir = dirname(require?.main?.filename || '');
         let pathtoRoodDir = join(rootDir, '../');

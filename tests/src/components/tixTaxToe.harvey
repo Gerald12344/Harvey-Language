@@ -1,0 +1,84 @@
+<iWant "src/components/board.harvey">
+<iWant "src/utils/checkWinner.harvey">
+<iWant "src/components/warningComponent.harvey">
+
+<hookFunction tixTaxToe <body
+    <letsmake <split One useOne> <useHook <string "">>>
+    <letsmake <split Two useTwo> <useHook <string "">>>
+    <letsmake <split Three useThree> <useHook <string "">>>
+    <letsmake <split Four useFour> <useHook <string "">>>
+    <letsmake <split Five useFive> <useHook <string "">>>
+    <letsmake <split Six useSix> <useHook <string "">>>
+    <letsmake <split Seven useSeven> <useHook <string "">>>
+    <letsmake <split Eight useEight> <useHook <string "">>>
+    <letsmake <split Nine useNine> <useHook <string "">>>
+
+    <comment "which player??">
+    <letsmake <split player usePlayer> <useHook <string "X">>>
+    <letsmake <split playertitle usePlayertitle> <useHook <string "Player 1">>>
+
+    <letsmake <split warning useWarning> <useHook <false>>>
+
+    <comment "end of game">
+    <letsmake <split gameOver useGameOver> <useHook <false>>>
+    <letsmake <split gameOverText useGameOverText> <useHook <false>>>
+
+    <letsmake arrayTosend <array One Two Three Four Five Six Seven Eight Nine>>
+
+    <function validateMove num <body
+        <if <equal gameOver.aInternal <true>> <body
+            <reply <false>>
+        >>
+
+        <letsmake itemGetting <itterate arrayTosend num>>
+
+        <if <notequal itemGetting.aInternal <string "">> <body
+            <call useWarning <true>>
+            <TimeOut 2000 <Arrowfunc <body
+                <call useWarning <false>>
+            >>>
+            
+            <reply <false>>
+        >>
+    >>
+
+    <comment "check for winner!">
+    <useUpdate <Arrowfunc <body
+        <letsmake gamestate <call checkWinner arrayTosend>>
+        <if <equal <itterate gamestate 0> <true>> <body
+            <call useGameOver <true>>
+            <call useGameOverText <itterate gamestate 1>>
+        >>
+    >> arrayTosend>
+
+
+    <render <string "body">
+        <a <string "Home"> <empty> <string "/">>
+        <hOne <string "Welcome To Tix Tax Toe!">>
+        <hTwo <array <string "Current Player: "> <var playertitle>>>
+
+        <usePortal warning WarningComponent <array parent>>
+        <usePortal gameOver WinningComponent <array parent gameOverText arrayTosend useGameOver usePlayer usePlayertitle>>
+
+
+        <call board parent arrayTosend player <function FlickPlayer num <body
+
+            <if <equal <call validateMove num> <false>> <body
+                <reply <false>>
+            >>
+
+            <if <equal player.aInternal <string "O">> <body
+                <call usePlayer <string "X">>
+                <call usePlayertitle <string "Player 2">>
+                <reply <true>>
+            >>
+
+            <if <equal player.aInternal <string "X">> <body
+                <call usePlayer <string "O">>
+                <call usePlayertitle <string "Player 1">>
+                <reply <true>>
+            >>
+            
+        >>> 
+    >
+>>

@@ -182,6 +182,10 @@
         {
             "case": "comp",
             "file": "HTML_Tags/comp.js"
+        },
+        {
+            "case": "Router",
+            "file": "HTML_Tags/Router.js"
         }
     ]
 }

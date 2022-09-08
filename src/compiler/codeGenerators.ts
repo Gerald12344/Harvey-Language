@@ -50,6 +50,7 @@ export function codeGenerator(node: finalAST): string | finalAST | string[] {
                     });
                     let lasts = ifStuff[ifStuff.length - 1];
                     ifStuff.splice(ifStuff.length - 1, 1);
+
                     return `if(${(node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string)
                         .replace('"', '')
                         .replace('"', '')}){${lasts}}`;
@@ -258,6 +259,7 @@ export function codeGenerator(node: finalAST): string | finalAST | string[] {
                     return response3;
             }
             let commands = fetchPlugins();
+
             if (!(commands[node?.callee?.name as string] === undefined)) {
                 if (pluginDependecies[node?.callee?.name as string] === undefined) {
                     pluginDependecies[node?.callee?.name as string] = true;
