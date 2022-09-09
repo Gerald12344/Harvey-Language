@@ -1,4 +1,4 @@
-<function GlobalCSS Mainparent <body
+<ComponentFunc GlobalCSS Mainparent <body
     <render <var Mainparent>
         <style <string "
             .nav-button{
@@ -26,6 +26,9 @@
                 transform: translate(0,100%);
             }
 
-        "> <empty>>
+            .Link {
+                color: #4CAF50;
+            }
+        "> <empty> >
     >
 >>
