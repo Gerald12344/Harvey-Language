@@ -1,5 +1,5 @@
 module.exports = {
-    Command: function (input) {
+    Command: function ({ input }) {
         return `useHook(${input[0]})`;
     },
     Dependencies: function () {

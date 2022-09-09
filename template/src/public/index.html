@@ -5,21 +5,21 @@
 
 <!DOCTYPE html>
 <html lang="en">
+    <head id="head">
+        <!-- this line below tells the packer where to put the bundle files -->
+        <!-- {{%Bundle%}} -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="description" content="hello" />
+        <link href="%public%/index.css" rel="stylesheet" type="text/css" />
+        <link href="%public%/test.css" rel="stylesheet" type="text/css" />
+        <link href="%public%/app.css" rel="stylesheet" type="text/css" />
+        <title>HTML complation test!!!!!!!!!!!</title>
+        <!-- {{%HEAD_FOR_SSR%}} -->
+    </head>
 
-<head id="head">
-	<!-- this line below tells the packer where to put the bundle files -->
-	<!-- {{%Bundle%}} -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-	<meta name="description" content="hello">
-	<link href="%public%/index.css" rel="stylesheet" type="text/css" />
-	<link href="%public%/test.css" rel="stylesheet" type="text/css" />
-	<link href="%public%/app.css" rel="stylesheet" type="text/css" />
-	<title>HTML complation test!!!!!!!!!!! </title>
-</head>
-
-<body id="body">
-</body>
-<script defer src="%build%"></script>
-
+    <body id="body">
+        <!-- {{%BODY_FOR_SSR%}} -->
+    </body>
+    <script defer src="%build%"></script>
 </html>

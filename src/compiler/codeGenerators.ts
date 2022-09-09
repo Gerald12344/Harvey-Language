@@ -22,7 +22,7 @@ export function clearcache() {
     pluginDependecies = {};
 }
 
-export function codeGenerator(node: finalAST): string | finalAST | string[] {
+export function codeGenerator(node: finalAST, InjectJS = false): string | finalAST | string[] {
     let settings = fetchSettings();
 
     switch (node.type) {
@@ -268,9 +268,10 @@ export function codeGenerator(node: finalAST): string | finalAST | string[] {
                     }
                 }
 
-                return commands[node?.callee?.name as string].Command(
-                    node?.arguments?.map((e) => codeGenerator(e as finalAST)),
-                );
+                return commands[node?.callee?.name as string].Command({
+                    input: node?.arguments?.map((e) => codeGenerator(e as finalAST)),
+                    InjectJS,
+                });
             }
 
         case 'Identifier':

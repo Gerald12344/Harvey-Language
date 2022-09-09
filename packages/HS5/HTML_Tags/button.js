@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 module.exports = {
-    Command: function (input) {
+    Command: function ({ input }) {
         let Parent = input[0];
         let className = input[1];
         let clickCallback = input[2];
@@ -12,7 +12,7 @@ module.exports = {
             secondPart = `((parent) => {${Children}})(InternalUUID)`;
         }
 
-        return `(() => {let InternalUUID = "${uuidv4()}"; let ElementWeWant = ReactfulElement('button',${Parent},parent, InternalUUID, ${className}); ${
+        return `(() => {let InternalUUID = (typeof itteration_ID === "undefined" ? "" :  itteration_ID) + "${uuidv4()}"; let ElementWeWant = ReactfulElement('button',${Parent},parent, InternalUUID, ${className}); ${
             typeof clickCallback !== 'undefined'
                 ? `try{ElementWeWant.Element.addEventListener("click", function(e) {${clickCallback}; }); }catch{}`
                 : ''

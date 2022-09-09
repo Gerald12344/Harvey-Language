@@ -1,6 +1,6 @@
 
 
-<function board parentIn props player callback <body
+<ComponentFunc board parentIn props player callback <body
 
     <render <var parentIn> <body
         <div <empty> <string "board">

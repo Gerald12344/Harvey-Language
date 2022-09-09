@@ -1,4 +1,4 @@
-<function WarningComponent Mainparent <body
+<ComponentFunc WarningComponent Mainparent <body
 
     <render <var Mainparent>
         <hThree <string "A player has already selected this square!"> <string "Warning">>
@@ -10,7 +10,7 @@
     >
 >>
 
-<function WinningComponent Mainparent Who ArrayOfState gameOver playerThing playerstuff <body
+<ComponentFunc WinningComponent Mainparent Who ArrayOfState gameOver playerThing playerstuff <body
     <render <var Mainparent>
         <hOne <string "GAME OVER!!!!"> <string "Winning">>
         <hTwo Who>

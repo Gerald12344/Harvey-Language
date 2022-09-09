@@ -1,7 +1,7 @@
 // This basically makes the parent for all the rendering stuff
 const { v4: uuidv4 } = require('uuid');
 module.exports = {
-    Command: function (input) {
+    Command: function ({ input }) {
         let parent = input[0];
         input.splice(0, 1);
         let children = input.join(';');

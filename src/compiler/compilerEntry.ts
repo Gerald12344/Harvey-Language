@@ -59,7 +59,7 @@ export function browserifyModules() {
     }
 }
 
-export async function compileFile(fileDirec: string, direc = false) {
+export async function compileFile(fileDirec: string, direc = false, InjectJS = false) {
     let logger = fetchLogger();
     let input: string = '';
     if (direc === false) {
@@ -111,7 +111,7 @@ export async function compileFile(fileDirec: string, direc = false) {
         logger?.log('warn', `Generating Code please hang on...`);
     }
 
-    let output = codeGenerator(newAst);
+    let output = codeGenerator(newAst, InjectJS);
     if (settings.debug) {
         logger?.log('warn', `Cleaning up Dependencies`);
     }

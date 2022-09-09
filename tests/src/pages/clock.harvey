@@ -51,7 +51,7 @@
     >> <array>>
 
     <render <string "body">
-        <a <string "Home"> <empty> <string "/">>
+        <a <string "Home"> <string "Link"> <string "/">>
         <div <empty> <string "clock-div">
             <hOne <string "The current time is:"> <string "Clock">>
 

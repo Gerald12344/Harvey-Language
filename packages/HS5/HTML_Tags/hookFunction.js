@@ -1,5 +1,5 @@
 module.exports = {
-    Command: function (input) {
+    Command: function ({ input }) {
         let propss = [...input];
         propss.forEach((e, i) => {
             if (i + 1 === propss.length) return;

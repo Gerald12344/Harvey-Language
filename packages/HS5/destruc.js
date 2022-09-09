@@ -1,8 +1,8 @@
 module.exports = {
-    Command: function(input){
-      return(`[${input.join(",")}]`)
+    Command: function ({ input }) {
+        return `[${input.join(',')}]`;
     },
-    Dependencies: function(){
-      return(false)
-    }
-  }
+    Dependencies: function () {
+        return false;
+    },
+};

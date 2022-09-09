@@ -64,10 +64,10 @@ export default async function app(options: Options) {
         injectJS = true;
     }
 
-    let HTML = SetupUpProdApp({ app: server, port });
+    let HTML = SetupUpProdApp({ app: server, port, shipJS: injectJS });
 
-    let code = await compileFile(`./${settings.inputFolder}/${settings.inputFile}`);
+    let code = await compileFile(`./${settings.inputFolder}/${settings.inputFile}`, false, injectJS);
 
-    SetupSSR(code);
+    SetupSSR(code, injectJS);
     injectHTML(server, HTML);
 }

@@ -16,7 +16,7 @@
 
 
 
-<" We start with just the homepage, the Router flag is required for the SSR hyrdation">
+<" We start with just the homepage">
 <Router RouterRoot <body
   <"First import global CSS">
   <call GlobalCSS <string "body">>

@@ -23,7 +23,7 @@ let SSR_CACHE: {
     };
 } = {};
 
-export function SetupSSR(codeCompiled: string) {
+export function SetupSSR(codeCompiled: string, injectJS: boolean) {
     let settings = fetchSettings();
     if (settings.debug) {
         logger?.log('warn', 'Loading SSR code');
@@ -36,6 +36,7 @@ export function SetupSSR(codeCompiled: string) {
     let routerManager = found[0];
 
     let lined = routerManager.replace(/;/g, ';\n').split('\n');
+
     lined.filter((e) => {
         if (e.includes('function')) return false;
         if (e.includes('RouterPoint')) {
@@ -56,20 +57,23 @@ export function SetupSSR(codeCompiled: string) {
 
     Global.forEach((e) => {
         let AST = GenerateASTForPage(codeCompiled, e);
-        let HTML = HtmlToAst(AST);
+        let HTML = HtmlToAst(AST, injectJS);
         SSR_GLOBAL_BODY += HTML.body;
         SSR_GLOBAL_HEAD += HTML.head;
     });
 
     Object.entries(functionsRoute).forEach(([key, value]) => {
         let AST = GenerateASTForPage(codeCompiled, value.route.replace(/;/g, '').replace(/}/g, ''));
-        let HTML = HtmlToAst(AST);
+
+        let HTML = HtmlToAst(AST, injectJS);
         SSR_CACHE[key.replace(/\'/g, '')] = {
             exact: value.exact,
             ...HTML,
         };
     });
 }
+
+let loggerIn = console.log;
 
 export function GenerateASTForPage(code: String, functionName: String) {
     try {
@@ -91,6 +95,7 @@ export function GenerateASTForPage(code: String, functionName: String) {
 
         return { body: { type: 'body' }, head: { type: 'head' }, ...hierachy };
     } catch (e) {
+        loggerIn(e);
         logger?.error(e);
     }
 }
@@ -100,18 +105,29 @@ interface AST_HTML {
     children: AST_HTML[];
     parent: string;
     closer: string;
+    SSR: Object;
 }
 
-function HtmlToAst(ast: { [key: string]: { type: string; parent: string; className: string; text: string } }) {
+function HtmlToAst(
+    ast: {
+        [key: string]: { type: string; parent: string; className: string; text: string; SSR: { [key: string]: any } };
+    },
+    injectJS: boolean,
+) {
     let html_ed: {
         [key: string]: AST_HTML;
     } = {};
 
+    if (ast === null || ast === undefined) return { body: '', head: '' };
+
     Object.entries(ast).forEach(([id, value]) => {
         html_ed[id] = {
-            opener: `<${value.type} class="${value.className ?? ''}" id="${id ?? ''}">${value.text ?? ''}`,
+            opener: `<${value.type}${value.className === '' ? '' : ` class="${value.className ?? ''}"`}${
+                injectJS ? ` id="${id ?? ''}"` : ''
+            }${value?.SSR?.SSR?.HREF !== undefined ? ` href="${value?.SSR?.SSR?.HREF}"` : ''}>${value.text ?? ''}`,
             children: [],
             parent: value.parent,
+            SSR: value.SSR,
             closer: `</${value.type}>`,
         };
     });
@@ -132,14 +148,17 @@ function HtmlToAst(ast: { [key: string]: { type: string; parent: string; classNa
     };
 
     return {
-        body: recursiveFunc(html_ed['body']).replace(`<body class="" id="body">`, '').replace(`</body>`, ''),
-        head: recursiveFunc(html_ed['head']).replace(`<head class="" id="head">`, '').replace(`</head>`, ''),
+        body: recursiveFunc(html_ed['body'])
+            .replace(/<body class="" id="body">/g, '')
+            .replace(`</body>`, ''),
+        head: recursiveFunc(html_ed['head'])
+            .replace(/<head class="" id="head">/g, '')
+            .replace(`</head>`, ''),
     };
 }
 
 export function injectHTML(app: Express, HTML: string) {
     let settings = fetchSettings();
-    app.disable('view cache');
 
     Object.entries(SSR_CACHE).forEach(([key, value]) => {
         app.get(key, (req, res) => {

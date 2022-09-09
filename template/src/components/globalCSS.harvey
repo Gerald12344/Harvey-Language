@@ -1,4 +1,4 @@
-<function GlobalCSS Mainparent <body
+<ComponentFunc GlobalCSS Mainparent <body
     <render <var Mainparent>
         <style <string "
             .nav-button{

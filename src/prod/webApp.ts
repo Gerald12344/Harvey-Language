@@ -3,13 +3,19 @@ import { join, resolve } from 'path';
 import { fetchSettings } from '../utils/settings';
 import express, { Express } from 'express';
 
-export function SetupUpProdApp({ app, port }: { app: Express; port: number }) {
+export function SetupUpProdApp({ app, port, shipJS }: { app: Express; port: number; shipJS: boolean }) {
     let settings = fetchSettings();
 
-    let text = readFileSync(join(resolve('./'), `./${settings.inputFolder}/public/index.html`), 'utf8')
-        .replace(/%build%/g, `${settings.outputFileName}`)
-        .replace(/%public%/g, `./public`)
-        .replace(/<!-- {{%Bundle%}} -->/g, `<script src="./packages/HarvScript_Bundle_1.js"></script>`);
+    let text = readFileSync(join(resolve('./'), `./${settings.inputFolder}/public/index.html`), 'utf8').replace(
+        /%public%/g,
+        `./public`,
+    );
+
+    if (shipJS) {
+        text = text
+            .replace(/<!-- {{%Build%}} -->/g, `<script defer src="${settings.outputFileName}"></script>`)
+            .replace(/<!-- {{%Bundle%}} -->/g, `<script src="./packages/HarvScript_Bundle_1.js"></script>`);
+    }
 
     /*let fileLocation = join(__dirname, '../../packages/harv-script/devfiles.html');
 

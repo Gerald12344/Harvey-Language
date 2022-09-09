@@ -93,6 +93,10 @@
             "file": "destruc.js"
         },
         {
+            "case": "JS",
+            "file": "JS.js"
+        },
+        {
             "case": "args",
             "file": "destructructingArray.js"
         },
@@ -182,6 +186,14 @@
         {
             "case": "comp",
             "file": "HTML_Tags/comp.js"
+        },
+        {
+            "case": "Component",
+            "file": "HTML_Tags/Component.js"
+        },
+        {
+            "case": "ComponentFunc",
+            "file": "HTML_Tags/ComponentFunc.js"
         },
         {
             "case": "Router",

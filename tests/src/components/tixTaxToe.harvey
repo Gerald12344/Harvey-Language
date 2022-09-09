@@ -53,7 +53,7 @@
 
 
     <render <string "body">
-        <a <string "Home"> <empty> <string "/">>
+        <a <string "Home"> <string "Link"> <string "/">>
         <hOne <string "Welcome To Tix Tax Toe!">>
         <hTwo <array <string "Current Player: "> <var playertitle>>>
 

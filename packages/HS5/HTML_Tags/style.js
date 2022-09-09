@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 module.exports = {
-    Command: function (input) {
+    Command: function ({ input }) {
         let styleString = input[0];
         let ModuleLocked = input[1];
 
@@ -15,7 +15,7 @@ module.exports = {
             secondPart = `((parent) => {${Children}})(InternalUUID)`;
         }
 
-        return `(() => {let InternalUUID = "${uuidv4()}"; let _STYLE_COMPONENT_STRING_HANDLER=${
+        return `(() => {let InternalUUID = (typeof itteration_ID === "undefined" ? "" :  itteration_ID) + "${uuidv4()}"; let _STYLE_COMPONENT_STRING_HANDLER=${
             ModuleLocked === 'true' || ModuleLocked === true
                 ? styleString + '.replaceAll(".", `.${_INTERNAL_UUID_USED_FOR_STYLES}_`)'
                 : `${styleString}`

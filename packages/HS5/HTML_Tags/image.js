@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 module.exports = {
-    Command: function (input) {
+    Command: function ({ input }) {
         let uuid = uuidv4();
         let Parent = input[0];
         let className = input[1];
@@ -11,7 +11,7 @@ module.exports = {
         if (Children !== '') {
             secondPart = `((parent) => {${Children}})(InternalUUID)`;
         }
-        return `(() => {let InternalUUID = "${uuidv4()}"; let ElementWeWant = ReactfulElement('img',${Parent},parent, InternalUUID, ${className});  ElementWeWant.Element.src=${src}; components.push(ElementWeWant); ${secondPart}})();`;
+        return `(() => {let InternalUUID = (typeof itteration_ID === "undefined" ? "" :  itteration_ID) + "${uuidv4()}"; let ElementWeWant = ReactfulElement('img',${Parent},parent, InternalUUID, ${className});  ElementWeWant.Element.src=${src}; components.push(ElementWeWant); ${secondPart}})();`;
     },
     Dependencies: function () {
         return false;

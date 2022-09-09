@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 module.exports = {
-    Command: function (input) {
+    Command: function ({ input, InjectJS }) {
         let uuid = uuidv4();
         let Parent = input[0];
         let className = input[1];
@@ -11,7 +11,25 @@ module.exports = {
         if (Children !== '') {
             secondPart = `((parent) => {${Children}})(InternalUUID)`;
         }
-        return `(() => {let InternalUUID = "${uuidv4()}"; let ElementWeWant = ReactfulElement('button',${Parent},parent, InternalUUID, ${className}); let NewElement = ReactfulElement('a',${Parent},parent, "${uuidv4()}", "hidden_tag"); components.push(ElementWeWant); try{ NewElement.Element.href = ${href}; MontiorInputs(InternalUUID, "click", (value) => { if (!(${href} === window.location.pathname)) { history.move(${href});} });; } catch {} ${secondPart}})();`;
+
+        return `(() => {
+            let InternalUUID = (typeof itteration_ID === "undefined" ? "" : itteration_ID) + "${uuidv4()}";
+            let NewElement = ReactfulElement('a', ${Parent}, parent, InternalUUID, ${className}, {
+                SSR: {
+                    HREF: ${href}
+                }
+            });
+            components.push(NewElement);
+            try {
+                NewElement.Element.href = ${href};
+                MontiorInputsPreventDefault(InternalUUID, "click", (value) => {
+                    if (!(${href} === window.location.pathname)) {
+                        history.move(${href});
+                    }
+                });;
+            } catch {}
+            ${secondPart}
+        })();`.replace(/\n|\r/g, '');
     },
     Dependencies: function () {
         return false;

@@ -1,4 +1,4 @@
-<function calculatorButton mainParent name callback <body
+<ComponentFunc calculatorButton mainParent name callback <body
     <render <var mainParent> 
         <div <empty> <string "buttonCSS"> 
             <button <empty> <empty>

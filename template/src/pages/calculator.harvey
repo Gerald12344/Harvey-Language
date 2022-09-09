@@ -31,7 +31,7 @@
         <div <empty> <string "calcBody"> 
             <hOne screenOutput <string "output">>
             <div <empty> <string "buttons-area">
-                <call calculatorButton InternalUUID <string "1"> handleClick>
+                <Component calculatorButton InternalUUID <string "1"> handleClick>
                 <call calculatorButton InternalUUID <string "2"> handleClick>
                 <call calculatorButton InternalUUID <string "3"> handleClick>
                 <call calculatorButton InternalUUID <string "+"> handleClick>

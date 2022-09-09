@@ -1,7 +1,7 @@
 <letsmake hierachy <array>>
 
 
-<function element type text id parent className <body
+<function element type text id parent className SSR <body
   <if <equal <typeof className <var className>> <string "object">> <body
     <assign className <string "">>
   >>
@@ -14,6 +14,9 @@
     <assign mainObject.text <var text>>
     <assign mainObject.parent <var parent>>
     <assign <itterate hierachy <var id>> <var mainObject>>
+    <if <notequal <typeof SSR> <string "undefined">> <body
+      <assign mainObject.SSR SSR>
+    >>
 
     <reply
       <var id>

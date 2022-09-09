@@ -1,8 +1,8 @@
 module.exports = {
-    Command: function (input) {
+    Command: function ({ input }) {
         return `""`;
     },
     Dependencies: function () {
-        return(false);
+        return false;
     },
 };

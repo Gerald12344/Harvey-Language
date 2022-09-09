@@ -2,7 +2,7 @@
 <iWant "src/utils/checkWinner.harvey">
 <iWant "src/components/warningComponent.harvey">
 
-<hookFunction tixTaxToe <body
+<ComponentFunc tixTaxToe <body
     <letsmake <split One useOne> <useHook <string "">>>
     <letsmake <split Two useTwo> <useHook <string "">>>
     <letsmake <split Three useThree> <useHook <string "">>>
