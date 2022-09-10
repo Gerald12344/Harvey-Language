@@ -4,7 +4,7 @@ module.exports = {
     Command: function ({ input }) {
         let start = input[0];
         let rest = input.slice(1);
-        return `${start}(${rest.join(',')}, "${v4()}");`;
+        return `${start}(${rest.join(',')}${rest.length > 0 ? ',' : ''} "${v4()}");`;
     },
     Dependencies: function () {
         return false;
