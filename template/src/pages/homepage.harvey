@@ -7,9 +7,9 @@
 
         <hThree <string "Here is a list of all pages so far!">>
         <ul <empty> <string "list">
-            <li <empty> <empty> <a <string "Tic Tac Toe!"> <empty> <string "tictactoe">>>
-            <li <empty> <empty> <a <string "Clock!"> <empty> <string "clock">>>
-            <li <empty> <empty> <a <string "Calculator!"> <empty> <string "calculator">>>
+            <li <empty> <empty> <a <string "Tic Tac Toe!"> <string "Link"> <string "tictactoe">>>
+            <li <empty> <empty> <a <string "Clock!"> <string "Link"> <string "clock">>>
+            <li <empty> <empty> <a <string "Calculator!"> <string "Link"> <string "calculator">>>
         >
         
         <style <scss "

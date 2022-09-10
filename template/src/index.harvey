@@ -17,7 +17,7 @@
 
 
 <" We start with just the homepage">
-<function RouterRoot <body
+<Router RouterRoot <body
   <"First import global CSS">
   <call GlobalCSS <string "body">>
 

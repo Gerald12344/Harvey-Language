@@ -26,6 +26,9 @@
                 transform: translate(0,100%);
             }
 
-        "> <empty>>
+            .Link {
+                color: #4CAF50;
+            }
+        "> <empty> >
     >
 >>

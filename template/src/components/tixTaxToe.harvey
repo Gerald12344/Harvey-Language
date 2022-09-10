@@ -2,7 +2,7 @@
 <iWant "src/utils/checkWinner.harvey">
 <iWant "src/components/warningComponent.harvey">
 
-<ComponentFunc tixTaxToe <body
+<hookFunction tixTaxToe <body
     <letsmake <split One useOne> <useHook <string "">>>
     <letsmake <split Two useTwo> <useHook <string "">>>
     <letsmake <split Three useThree> <useHook <string "">>>
@@ -53,7 +53,7 @@
 
 
     <render <string "body">
-        <a <string "Home"> <empty> <string "/">>
+        <a <string "Home"> <string "Link"> <string "/">>
         <hOne <string "Welcome To Tix Tax Toe!">>
         <hTwo <array <string "Current Player: "> <var playertitle>>>
 
