@@ -49,7 +49,7 @@ let setupCompiler = () => {
         lastUpdate = Date.now();
         if (settings.dev === true) {
             let text = readFileSync(join(resolve('./'), `./${settings.inputFolder}/public/index.html`), 'utf8')
-                .replace(/%build%/g, `${settings.outputFileName}`)
+                .replace(/<!-- {{%Build%}} -->/g, `<script defer src="${settings.outputFileName}"></script>`)
                 .replace(/%public%/g, `./public`)
                 .replace(/<!-- {{%Bundle%}} -->/g, `<script src="./packages/HarvScript_Bundle_1.js"></script>`);
 
