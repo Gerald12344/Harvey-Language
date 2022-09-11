@@ -1,6 +1,6 @@
 module.exports = {
     Command: function ({ input }) {
-        return `_INTERNAL_UUID_USED_FOR_STYLES + "_" + "${input[0]}"`;
+        return `${input.map((e) => `_INTERNAL_UUID_USED_FOR_STYLES + "_" + "${e}"`).join(' + " " + ')}`;
     },
     Dependencies: function () {
         return false;
