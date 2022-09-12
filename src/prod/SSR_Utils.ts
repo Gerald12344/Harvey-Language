@@ -25,9 +25,11 @@ let SSR_CACHE: {
 
 function removeServerSideStuff(code: string): { serverSideFunctions: string; code: string } {
     let regex = /(?<=\/\* API POINTER \*\/)(.*)(?=\/\* END OF API POINTER \*\/)/g;
+    let regex2 = /(?<=\/\* USE UPDATE HOOK \*\/)(.*)(?=\/\* USE UPDATE HOOK \*\/)/g;
 
     let serverSideFunctions = code.match(regex);
     let fixedCode = code.replace(regex, '');
+    fixedCode = fixedCode.replace(regex2, '');
 
     return { serverSideFunctions: serverSideFunctions?.join('') ?? '', code: fixedCode };
 }
