@@ -7,5 +7,5 @@ app_1.default({
     injectJS: true,
     SSR: true,
     server: app,
-    port: 3000,
+    port: 3001,
 });

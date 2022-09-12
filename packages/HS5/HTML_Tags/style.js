@@ -23,7 +23,7 @@ module.exports = {
             ${
                 ModuleLocked === 'true' || ModuleLocked === true
                     ? `
-                    [${mainMatches}].forEach(e => {
+                    Array.from(new Set([${mainMatches}])).forEach(e => {
                         _STYLE_COMPONENT_STRING_HANDLER = _STYLE_COMPONENT_STRING_HANDLER.replace(new RegExp("." + e,"g"), \`.\${_INTERNAL_UUID_USED_FOR_STYLES}_\${e.replace(".",'').replace("{",'')} \n\`);
                     });
             `
