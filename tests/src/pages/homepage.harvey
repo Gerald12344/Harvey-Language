@@ -1,4 +1,8 @@
-<function homepage <body
+<hookFunction homepage <body
+
+    <useUpdate <Arrowfunc <body
+        <call axios.get <string "/test-api">>
+    >> <array>>
 
     <render <string "body">
         <hOne <string "Welcome to .harvey playground!"> <string "Welcome">>
@@ -31,5 +35,5 @@
 >>
 
 <GET <string "/test-api"> req res <body
-    <call res.send <string "hello">>
+    <call res.send <string "hello new new!!">>
 >>

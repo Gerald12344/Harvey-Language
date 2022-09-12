@@ -6,13 +6,14 @@ import { existsSync, mkdirSync, opendirSync, readFile, readFileSync, writeFileSy
 import { compileFile } from '../compiler/compilerEntry';
 import { resolve, join } from 'path';
 import { removeServerSideStuff } from '../prod/SSR_Utils';
+import { Server } from 'http';
 
 let lastUpdate = Date.now();
 let compileStartTime = Date.now();
 const app = express();
 app.use(express.json());
 
-let setupCompiler = () => {
+let setupCompiler = (restartServer: () => Promise<void>) => {
     app.get('/api/recompiling', (req, res) => {
         res.send(`${compileStartTime}`);
     });
@@ -26,14 +27,27 @@ let setupCompiler = () => {
         let CompiledJS: string = '';
         try {
             CompiledJS = await compileFile(input, true);
+            //await restartServer();
+
             let { code, serverSideFunctions } = removeServerSideStuff(CompiledJS);
             CompiledJS = code;
             writeFileSync(
                 join(`./${settings.outputFolder}`, `/${settings.debugFileLocation}`, `/${settings.debugFileName}`),
                 CompiledJS,
             );
-            delete app.routes;
-            app.routes = {};
+
+            app._router.stack = (app._router.stack as { route: undefined | { path: string } }[]).filter((e) => {
+                if (e.route) {
+                    if (e.route.path === '/api/recompiling') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            });
+
             let MainExpressAPP = app;
             MainExpressAPP; // Silence compiler errors, cause its used in eval
             eval(serverSideFunctions);
@@ -117,7 +131,27 @@ let setupCompiler = () => {
 export function watchChangesWithWebServer() {
     const settings = fetchSettings();
 
-    setupCompiler();
+    let server: Server;
+
+    let restartServer = (): Promise<void> => {
+        return new Promise((resolve, reject) => {
+            console.log(server);
+            if (server) {
+                server.close(() => {
+                    server = app.listen(3000, () => {
+                        console.log('Server restarted');
+                        resolve();
+                    });
+                });
+            } else {
+                server = app.listen(3000, () => {
+                    resolve();
+                });
+            }
+        });
+    };
+
+    setupCompiler(restartServer);
 
     var watcher = watch(`./${settings.inputFolder}`, {
         ignored: /^\./,
@@ -125,11 +159,12 @@ export function watchChangesWithWebServer() {
     });
     let logger = fetchLogger();
     let startTime = Date.now();
+
     let restart = () => {
         if (Date.now() - 5000 < startTime) {
             return;
         }
-        setupCompiler();
+        setupCompiler(restartServer);
     };
     watcher
         .on('add', function (path) {
@@ -148,5 +183,5 @@ export function watchChangesWithWebServer() {
             logger?.log('error', `Error happened, ${error}`);
         });
 
-    app.listen(3000, () => logger?.log('debug', 'App listening on port 3000!'));
+    server = app.listen(3000, () => logger?.log('debug', 'App listening on port 3000!'));
 }
