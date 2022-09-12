@@ -2,6 +2,7 @@ import browserify from 'browserify';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { obfuscate } from 'javascript-obfuscator';
 import { join } from 'path';
+import { removeServerSideStuff } from '../prod/SSR_Utils';
 import { createFolder } from '../utils/createApp';
 import { fetchLogger } from '../utils/logger';
 import { loadPlugins } from '../utils/pluginManager';
@@ -136,7 +137,8 @@ export async function compileFile(fileDirec: string, direc = false, InjectJS = f
             logger?.log('warn', `Obfuscating and minifying output!`);
         }
         //console.log(Prepack.prepackSources([{filePath:'MainOutput', fileContents:JavaScriptObfuscator.obfuscate(output)}]))
-        MainOut = obfuscate(output, {}) as unknown as string;
+        let { code } = removeServerSideStuff(output);
+        MainOut = obfuscate(code, {}) as unknown as string;
     }
 
     if (settings.debug) {

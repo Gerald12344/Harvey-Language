@@ -5,6 +5,7 @@ import express from 'express';
 import { existsSync, mkdirSync, opendirSync, readFile, readFileSync, writeFileSync } from 'fs';
 import { compileFile } from '../compiler/compilerEntry';
 import { resolve, join } from 'path';
+import { removeServerSideStuff } from '../prod/SSR_Utils';
 
 let lastUpdate = Date.now();
 let compileStartTime = Date.now();
@@ -25,7 +26,19 @@ let setupCompiler = () => {
         let CompiledJS: string = '';
         try {
             CompiledJS = await compileFile(input, true);
+            let { code, serverSideFunctions } = removeServerSideStuff(CompiledJS);
+            CompiledJS = code;
+            writeFileSync(
+                join(`./${settings.outputFolder}`, `/${settings.debugFileLocation}`, `/${settings.debugFileName}`),
+                CompiledJS,
+            );
+            delete app.routes;
+            app.routes = {};
+            let MainExpressAPP = app;
+            MainExpressAPP; // Silence compiler errors, cause its used in eval
+            eval(serverSideFunctions);
         } catch (e) {
+            console.log(e);
             logger?.log('error', e);
             logger?.log('warn', 'FATAL COMPLATION ERROR');
         }
@@ -53,11 +66,14 @@ let setupCompiler = () => {
                 .replace(/<!-- {{%Bundle%}} -->/g, `<script src="./packages/HarvScript_Bundle_1.js"></script>`);
 
             if (settings.debugFile === true) {
-                text.replace(/<!-- {{%Build%}} -->/g, `<script defer src="${settings.outputFileName}"></script>`);
-            } else {
-                text.replace(
+                text = text.replace(
                     /<!-- {{%Build%}} -->/g,
-                    `<script defer src="${settings.debugFileLocation}/${settings.debugFile}"></script>`,
+                    `<script defer src="${settings.debugFileLocation}/${settings.debugFileName}"></script>`,
+                );
+            } else {
+                text = text.replace(
+                    /<!-- {{%Build%}} -->/g,
+                    `<script defer src="${settings.outputFileName}"></script>`,
                 );
             }
 

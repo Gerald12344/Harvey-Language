@@ -23,7 +23,7 @@ let SSR_CACHE: {
     };
 } = {};
 
-function removeServerSideStuff(code: string): { serverSideFunctions: string; code: string } {
+export function removeServerSideStuff(code: string): { serverSideFunctions: string; code: string } {
     let regex = /(?<=\/\* API POINTER \*\/)(.*)(?=\/\* END OF API POINTER \*\/)/g;
     let regex2 = /(?<=\/\* USE UPDATE HOOK \*\/)(.*)(?=\/\* USE UPDATE HOOK \*\/)/g;
 
