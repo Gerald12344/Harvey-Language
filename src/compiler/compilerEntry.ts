@@ -137,7 +137,7 @@ export async function compileFile(fileDirec: string, direc = false, InjectJS = f
             logger?.log('warn', `Obfuscating and minifying output!`);
         }
         //console.log(Prepack.prepackSources([{filePath:'MainOutput', fileContents:JavaScriptObfuscator.obfuscate(output)}]))
-        let { code } = removeServerSideStuff(output);
+        let { code } = removeServerSideStuff(output, { noUseUpdate: false });
         MainOut = obfuscate(code, {}) as unknown as string;
     }
 

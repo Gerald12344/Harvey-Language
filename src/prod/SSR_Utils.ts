@@ -37,7 +37,7 @@ export function removeServerSideStuff(
     let serverSideFunctions = code.match(regex);
     let fixedCode = code.replace(regex, '');
 
-    if (options?.noUseUpdate === false || options?.noUseUpdate === undefined) {
+    if (options?.noUseUpdate === true || options?.noUseUpdate === undefined) {
         fixedCode = fixedCode.replace(regex2, '');
     }
 
