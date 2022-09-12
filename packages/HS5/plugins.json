@@ -200,8 +200,12 @@
             "file": "HTML_Tags/Router.js"
         },
         {
-            "case": "API",
-            "file": "HTML_Tags/API.js"
+            "case": "GET",
+            "file": "HTML_Tags/API_GET.js"
+        },
+        {
+            "case": "POST",
+            "file": "HTML_Tags/API_POST.js"
         }
     ]
 }

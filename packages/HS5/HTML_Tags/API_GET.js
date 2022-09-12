@@ -9,7 +9,7 @@ module.exports = {
         let last = propss[propss.length - 1];
         propss.splice(propss.length - 1, 1);
         return `/* API POINTER */ 
-        MainExpressAPP[${input[0]}]("/api" + ${input[1]}, (${input[2]}, ${input[3]}) => {
+        MainExpressAPP["get"]("/api" + ${input[0]}, (${input[1]}, ${input[2]}) => {
             ${last}
         })
         /* END OF API POINTER */`.replace(/[\r\n]/gm, '');

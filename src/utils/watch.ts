@@ -49,9 +49,17 @@ let setupCompiler = () => {
         lastUpdate = Date.now();
         if (settings.dev === true) {
             let text = readFileSync(join(resolve('./'), `./${settings.inputFolder}/public/index.html`), 'utf8')
-                .replace(/<!-- {{%Build%}} -->/g, `<script defer src="${settings.outputFileName}"></script>`)
                 .replace(/%public%/g, `./public`)
                 .replace(/<!-- {{%Bundle%}} -->/g, `<script src="./packages/HarvScript_Bundle_1.js"></script>`);
+
+            if (settings.debugFile === true) {
+                text.replace(/<!-- {{%Build%}} -->/g, `<script defer src="${settings.outputFileName}"></script>`);
+            } else {
+                text.replace(
+                    /<!-- {{%Build%}} -->/g,
+                    `<script defer src="${settings.debugFileLocation}/${settings.debugFile}"></script>`,
+                );
+            }
 
             let fileLocation = join(__dirname, '../../packages/harv-script/devfiles.html');
 
