@@ -29,7 +29,7 @@ let setupCompiler = (restartServer: () => Promise<void>) => {
             CompiledJS = await compileFile(input, true);
             //await restartServer();
 
-            let { code, serverSideFunctions } = removeServerSideStuff(CompiledJS);
+            let { code, serverSideFunctions } = removeServerSideStuff(CompiledJS, { noUseUpdate: true });
             CompiledJS = code;
             writeFileSync(
                 join(`./${settings.outputFolder}`, `/${settings.debugFileLocation}`, `/${settings.debugFileName}`),
