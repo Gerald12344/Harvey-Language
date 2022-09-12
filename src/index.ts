@@ -68,6 +68,6 @@ export default async function app(options: Options) {
 
     let code = await compileFile(`./${settings.inputFolder}/${settings.inputFile}`, false, injectJS);
 
-    SetupSSR(code, injectJS);
-    injectHTML(server, HTML);
+    let { serverSideFunctions } = SetupSSR(code, injectJS);
+    injectHTML({ app: server, HTML, serverSideFunctions });
 }

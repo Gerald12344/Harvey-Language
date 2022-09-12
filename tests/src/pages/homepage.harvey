@@ -29,3 +29,7 @@
         "> <true>>
     >
 >>
+
+<API <string "get"> <string "/test-api"> req res <body
+    <call res.send <string "hello">>
+>>

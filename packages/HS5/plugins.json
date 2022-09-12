@@ -198,6 +198,10 @@
         {
             "case": "Router",
             "file": "HTML_Tags/Router.js"
+        },
+        {
+            "case": "API",
+            "file": "HTML_Tags/API.js"
         }
     ]
 }

@@ -23,6 +23,15 @@ let SSR_CACHE: {
     };
 } = {};
 
+function removeServerSideStuff(code: string): { serverSideFunctions: string; code: string } {
+    let regex = /(?<=\/\* API POINTER \*\/)(.*)(?=\/\* END OF API POINTER \*\/)/g;
+
+    let serverSideFunctions = code.match(regex);
+    let fixedCode = code.replace(regex, '');
+
+    return { serverSideFunctions: serverSideFunctions?.join('') ?? '', code: fixedCode };
+}
+
 export function SetupSSR(codeCompiled: string, injectJS: boolean) {
     let settings = fetchSettings();
     if (settings.debug) {
@@ -30,9 +39,12 @@ export function SetupSSR(codeCompiled: string, injectJS: boolean) {
     }
     let regex = /(?<=\/\* ROUTER POINT FOR SSR \*\/)(.*)(?=\/\* END OF ROUTER POINT FOR SSR \*\/)/gm;
 
+    let { code, serverSideFunctions } = removeServerSideStuff(codeCompiled);
+    codeCompiled = code;
+
     let found = codeCompiled.match(regex);
 
-    if (found === null) return;
+    if (found === null) return { serverSideFunctions };
     let routerManager = found[0];
 
     let lined = routerManager.replace(/;/g, ';\n').split('\n');
@@ -71,6 +83,8 @@ export function SetupSSR(codeCompiled: string, injectJS: boolean) {
             ...HTML,
         };
     });
+
+    return { serverSideFunctions };
 }
 
 let loggerIn = console.log;
@@ -157,7 +171,13 @@ function HtmlToAst(
     };
 }
 
-export function injectHTML(app: Express, HTML: string) {
+interface MainInput {
+    app: Express;
+    HTML: string;
+    serverSideFunctions: string;
+}
+
+export function injectHTML({ app, HTML, serverSideFunctions }: MainInput) {
     let settings = fetchSettings();
 
     Object.entries(SSR_CACHE).forEach(([key, value]) => {
@@ -172,6 +192,10 @@ export function injectHTML(app: Express, HTML: string) {
             res.send(newHtml);
         });
     });
+
+    let MainExpressAPP = app;
+    MainExpressAPP; // Silence compiler errors, cause its used in eval
+    eval(serverSideFunctions);
 
     app.get('*', (req, res, next) => {
         let url = req.url.split('/');
