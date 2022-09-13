@@ -14,6 +14,7 @@
 <iWant "src/pages/homepage.harvey">
 <iWant "src/pages/clock.harvey">
 <iWant "src/pages/calculator.harvey">
+<iWant "src/pages/dataFetching.harvey">
 
 
 
@@ -26,6 +27,7 @@
   <call RouterPoint <string "/tictactoe"> <true> <var tixTaxToe>>
   <call RouterPoint <string "/clock"> <true> <var Clock>>
   <call RouterPoint <string "/calculator"> <true> <var Calculator>>
+  <call RouterPoint <string "/data"> <true> <var dataTest>>
 >>
 
 

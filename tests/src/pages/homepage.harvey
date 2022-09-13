@@ -1,8 +1,15 @@
+
+<RemoteFunc newApi <body
+    <send <string "newApi better">>
+>>
+
 <hookFunction homepage <body
 
-    <useUpdate <Arrowfunc <body
-        <call axios.get <string "/test-api">>
-    >> <array>>
+    <letsmake <split dataFromApi setDataFromApi> <useHook <string "loading">>>
+
+    <useUpdate <async <Arrowfunc <body
+        <call setDataFromApi <CallRemoteFunc newApi <string "loading">>>
+    >>> <array>>
 
     <render <string "body">
         <hOne <string "Welcome to .harvey playground!"> <string "Welcome">>
@@ -15,6 +22,8 @@
             <li <empty> <empty> <a <string "Clock!"> <string "Link"> <string "clock">>>
             <li <empty> <empty> <a <string "Calculator!"> <string "Link"> <string "calculator">>>
         >
+
+        <p <var dataFromApi>>
         
         <style <scss "
             .Welcome {
@@ -34,6 +43,5 @@
     >
 >>
 
-<GET <string "/test-api"> req res <body
-    <call res.send <string "hello new new!!">>
->>
+
+

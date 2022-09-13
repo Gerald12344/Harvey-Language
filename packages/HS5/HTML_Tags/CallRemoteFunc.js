@@ -8,11 +8,18 @@ module.exports = {
         });
         let last = propss[propss.length - 1];
         propss.splice(propss.length - 1, 1);
-        return `/* API POINTER */ 
-        MainExpressAPP["get"]("/api" + ${input[0]}, (${input[1]}, ${input[2]}) => {
-            ${last}
-        });
-        /* END OF API POINTER */`.replace(/[\r\n]/gm, '');
+
+        return `/* DATA FETCH */ 
+        await (await (async () => {
+            if (typeof Hydration === 'undefined') {
+                return fetch("/api/" + "${input[0]}");
+            } else {
+                return new Promise((resolve, reject) => {
+                    resolve({text: () => ${input[1]}});
+                });
+            };
+        })()).text()
+        /* END OF DATA FETCH */`.replace(/[\r\n]/gm, '');
     },
     Dependencies: function () {
         return false;

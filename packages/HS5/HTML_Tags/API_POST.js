@@ -11,7 +11,7 @@ module.exports = {
         return `/* API POINTER */ 
         MainExpressAPP["post"]("/api" + ${input[0]}, (${input[1]}, ${input[2]}) => {
             ${last}
-        })
+        });
         /* END OF API POINTER */`.replace(/[\r\n]/gm, '');
     },
     Dependencies: function () {
