@@ -143,6 +143,10 @@
             "file": "HTML_Tags/ul.js"
         },
         {
+            "case": "input",
+            "file": "HTML_Tags/input.js"
+        },
+        {
             "case": "ol",
             "file": "HTML_Tags/ol.js"
         },

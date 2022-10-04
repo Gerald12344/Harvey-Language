@@ -111,8 +111,8 @@ export function GenerateASTForPage(code: String, functionName: String) {
         let logger = console.log;
         console.log = () => {};
   ` +
-                code +
-                `
+            code +
+            `
     ${functionName}();
     console.log = logger;
     hierachy
@@ -148,9 +148,8 @@ function HtmlToAst(
 
     Object.entries(ast).forEach(([id, value]) => {
         html_ed[id] = {
-            opener: `<${value.type}${value.className === '' ? '' : ` class="${value.className ?? ''}"`}${
-                injectJS ? ` id="${id ?? ''}"` : ''
-            }${value?.SSR?.SSR?.HREF !== undefined ? ` href="${value?.SSR?.SSR?.HREF}"` : ''}>${value.text ?? ''}`,
+            opener: `<${value.type}${value.className === '' ? '' : ` class="${value.className ?? ''}"`}${injectJS ? ` id="${id ?? ''}"` : ''
+                }${value?.SSR?.SSR?.HREF !== undefined ? ` href="${value?.SSR?.SSR?.HREF}"` : ''}${value?.SSR?.SSR?.Type !== undefined ? ` type="${value?.SSR?.SSR?.Type}"` : ''}>${value.text ?? ''}`,
             children: [],
             parent: value.parent,
             SSR: value.SSR,

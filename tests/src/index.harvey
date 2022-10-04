@@ -16,7 +16,6 @@
 <iWant "src/pages/calculator.harvey">
 <iWant "src/pages/dataFetching.harvey">
 
-<itterate x 5 5>
 
 <" We start with just the homepage">
 <Router RouterRoot <body

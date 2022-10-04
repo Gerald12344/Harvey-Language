@@ -26,6 +26,7 @@
             <li <empty> <empty> <a <string "Calculator!"> <string "Link"> <string "calculator">>>
         >
 
+        <input <string ""> <empty> <string "text">>
         <p <var dataFromApi>>
         
         <style <scss "
