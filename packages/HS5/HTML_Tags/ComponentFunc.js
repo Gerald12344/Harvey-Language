@@ -11,7 +11,8 @@ module.exports = {
         propss.shift();
         return `function ${input[0].replace('"', '').replace('"', '')}(${propss.join(',')}${
             propss.length > 0 ? ',' : ''
-        } itteration_ID = ""){
+        } myId = "" ,itteration_ID = ""){
+            itteration_ID = itteration_ID + myId;
             let useUpdateArray=[];
             ${last}
         }

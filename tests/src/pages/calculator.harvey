@@ -25,6 +25,8 @@
         <call useOutput <add <string "="> <call eval formattedString>>>
     >>
 
+    <sendOut screenOutput.aInternal>
+
     <render <string "body">
         <a <string "Home"> <string "Link"> <string "/">>
         <hOne <string ".Harvey calculator, using components for buttons!">>
