@@ -13,7 +13,6 @@
 
 
 
-    <sendOut arrayOfEvents>
 
     <render <string "body">
         <hOne <string "Welcome to .harvey playground!"> <string "Welcome">>
