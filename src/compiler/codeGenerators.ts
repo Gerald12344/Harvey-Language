@@ -79,22 +79,20 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                         propsss[i] = e.replace('"', '').replace('"', '');
                     });
                     propsss.splice(propsss.length - 1, 1);
-                    return `(${propsss.join(',')}) => {${
-                        node?.arguments?.map((e) => codeGenerator(e as finalAST))[
-                            node?.arguments?.map((e) => codeGenerator(e as finalAST))?.length - 1
+                    return `(${propsss.join(',')}) => {${node?.arguments?.map((e) => codeGenerator(e as finalAST))[
+                        node?.arguments?.map((e) => codeGenerator(e as finalAST))?.length - 1
                         ]
-                    }}`;
+                        }}`;
                 case 'selfCallingFunction':
                     let propssss = node?.arguments?.map((e) => codeGenerator(e as finalAST)) as string[];
                     propssss.forEach((e, i) => {
                         propssss[i] = e.replace('"', '').replace('"', '');
                     });
                     propssss.splice(propssss.length - 1, 1);
-                    return `((${propssss.join(',')}) => {${
-                        node?.arguments?.map((e) => codeGenerator(e as finalAST))[
-                            node?.arguments?.map((e) => codeGenerator(e as finalAST))?.length - 1
+                    return `((${propssss.join(',')}) => {${node?.arguments?.map((e) => codeGenerator(e as finalAST))[
+                        node?.arguments?.map((e) => codeGenerator(e as finalAST))?.length - 1
                         ]
-                    }})(${propssss.join(',')});`;
+                        }})(${propssss.join(',')});`;
                 case 'sendOut':
                     let inputs = node?.arguments?.map((e) => codeGenerator(e as finalAST))[0];
                     if ((node?.arguments?.map((e) => codeGenerator(e as finalAST)) as string[])?.length > 1) {
@@ -112,8 +110,8 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                     )
                         .replace('"', '')
                         .replace('"', '')}, ${(node?.arguments?.map((e) => codeGenerator(e as finalAST))[1] as string)
-                        .replace('"', '')
-                        .replace('"', '')}) => {${promiseArray.join(';')}}))`;
+                            .replace('"', '')
+                            .replace('"', '')}) => {${promiseArray.join(';')}}))`;
 
                 case 'iNeed':
                     modules.push(node?.arguments?.map((e) => codeGenerator(e as finalAST)) as unknown as string);
@@ -150,9 +148,8 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                     if (node?.arguments?.map((e) => codeGenerator(e as finalAST))?.length === 0) {
                         return `{}`;
                     }
-                    return `{${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]}: ${
-                        node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
-                    }}`;
+                    return `{${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]}: ${node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
+                        }}`;
                 case 'if':
                     return `if(${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]})`;
                 case 'after':
@@ -178,17 +175,14 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                         .replace('"', '')
                         .replace('"', '');
                 case 'equal':
-                    return `${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]} === ${
-                        node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
-                    }`;
+                    return `${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]} === ${node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
+                        }`;
                 case 'notequal':
-                    return `!(${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]} === ${
-                        node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
-                    })`;
+                    return `!(${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]} === ${node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
+                        })`;
                 case 'and':
-                    return `${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]} && ${
-                        node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
-                    }`;
+                    return `${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]} && ${node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
+                        }`;
                 case 'true':
                     return 'true';
                 case 'false':
@@ -199,17 +193,14 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                     let variable = (node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string)
                         .replace('"', '')
                         .replace('"', '');
-                    return `for(let ${variable}=0;${variable}<${
-                        node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
-                    };${variable}=${variable}+${
-                        node?.arguments?.map((e) => codeGenerator(e as finalAST))[2]
-                    }){${lastes}}`;
+                    return `for(let ${variable}=0;${variable}<${node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
+                        };${variable}=${variable}+${node?.arguments?.map((e) => codeGenerator(e as finalAST))[2]
+                        }){${lastes}}`;
                 case 'get':
                     return `document.getElementById(${node?.arguments?.map((e) => codeGenerator(e as finalAST))})`;
                 case 'assign':
-                    return `${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]} = ${
-                        node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
-                    }`;
+                    return `${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]} = ${node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
+                        }`;
                 case 'string':
                     return `'${node?.arguments
                         ?.map((e) => codeGenerator(e as finalAST))
@@ -221,9 +212,12 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                 case 'array':
                     return `[${node?.arguments?.map((e) => codeGenerator(e as finalAST))?.join(',')}]`;
                 case 'itterate':
-                    return `${node?.arguments?.map((e) => codeGenerator(e as finalAST))[0]}[${
-                        node?.arguments?.map((e) => codeGenerator(e as finalAST))[1]
-                    }]`;
+                    let original = node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string;
+                    let arr = node?.arguments?.map((e) => codeGenerator(e as finalAST)) as string[];
+                    arr.slice(0, 1);
+
+                    return `${original}[${arr.join(",")
+                        }]`;
                 case 'concat':
                     return `${node?.arguments?.map((e) => codeGenerator(e as finalAST))?.join('')}`;
                 case 'null':
@@ -239,7 +233,7 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                             '../../../packages/harv-script',
                             '/',
                             (node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string).replace('"', '') +
-                                '/index.harvey'.replace('"', ''),
+                            '/index.harvey'.replace('"', ''),
                         ),
                         'utf-8',
                     );

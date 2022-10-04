@@ -42,3 +42,17 @@
     <reply output>
 >>
 
+<JS <string "function useHookArray(input){
+    let hooks = [];
+    input.forEach(e => {
+        let mainReactfulVar = ReactFulVariableMaker(e);
+        hooks.push(mainReactfulVar);
+    });
+
+    return [hooks, function update(val, itt){
+        hooks[itt].update(val);
+    }];
+}">
+
+
+>

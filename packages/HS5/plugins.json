@@ -168,6 +168,10 @@
             "file": "HTML_Tags/useHook.js"
         },
         {
+            "case": "useHookArray",
+            "file": "HTML_Tags/useHookArray.js"
+        },
+        {
             "case": "usePortal",
             "file": "HTML_Tags/componentBoolean.js"
         },

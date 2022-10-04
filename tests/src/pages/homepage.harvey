@@ -11,6 +11,10 @@
         <call setDataFromApi <CallRemoteFunc newApi <string "loading">>>
     >>> <array>>
 
+
+
+    <sendOut arrayOfEvents>
+
     <render <string "body">
         <hOne <string "Welcome to .harvey playground!"> <string "Welcome">>
 
