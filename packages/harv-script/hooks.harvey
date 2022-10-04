@@ -43,14 +43,16 @@
 >>
 
 <JS <string "function useHookArray(input){
-    let hooks = [];
+    let hooksInternal = [];
     input.forEach(e => {
         let mainReactfulVar = ReactFulVariableMaker(e);
-        hooks.push(mainReactfulVar);
+        hooksInternal.push(mainReactfulVar);
     });
+    
+    hooks = [...hooks, ...hooksInternal];
 
-    return [hooks, function update(val, itt){
-        hooks[itt].update(val);
+    return [hooksInternal, function update(val, itt){
+        hooksInternal[itt].update = val;
     }];
 }">
 

@@ -81,7 +81,7 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                     propsss.splice(propsss.length - 1, 1);
                     return `(${propsss.join(',')}) => {${node?.arguments?.map((e) => codeGenerator(e as finalAST))[
                         node?.arguments?.map((e) => codeGenerator(e as finalAST))?.length - 1
-                        ]
+                    ]
                         }}`;
                 case 'selfCallingFunction':
                     let propssss = node?.arguments?.map((e) => codeGenerator(e as finalAST)) as string[];
@@ -91,7 +91,7 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                     propssss.splice(propssss.length - 1, 1);
                     return `((${propssss.join(',')}) => {${node?.arguments?.map((e) => codeGenerator(e as finalAST))[
                         node?.arguments?.map((e) => codeGenerator(e as finalAST))?.length - 1
-                        ]
+                    ]
                         }})(${propssss.join(',')});`;
                 case 'sendOut':
                     let inputs = node?.arguments?.map((e) => codeGenerator(e as finalAST))[0];
@@ -214,10 +214,9 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                 case 'itterate':
                     let original = node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string;
                     let arr = node?.arguments?.map((e) => codeGenerator(e as finalAST)) as string[];
-                    arr.slice(0, 1);
+                    arr.shift();
 
-                    return `${original}[${arr.join(",")
-                        }]`;
+                    return `${original}${arr.map(e => `[${e}]`).join("")}`;
                 case 'concat':
                     return `${node?.arguments?.map((e) => codeGenerator(e as finalAST))?.join('')}`;
                 case 'null':
