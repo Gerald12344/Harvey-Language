@@ -1,11 +1,13 @@
 const { v4: uuidv4 } = require('uuid');
+const BoilerPlater = require('./BOILERPLATE.js');
+
 module.exports = {
     Command: function ({ input }) {
-        let uuid = uuidv4();
         let Parent = input[0];
         let className = input[1];
         let type = input[2];
-        input.splice(0, 3);
+        let reactiveFunc = input[3];
+        input.splice(0, 4);
         let Children = input.join(';');
         let secondPart = '';
         if (Children !== '') {
@@ -20,7 +22,8 @@ module.exports = {
                 }
             }); 
             try {
-                NewElement.Element.type = ${type};
+                ElementWeWant.Element.type = ${type};
+                ElementWeWant.Element.addEventListener("input", function(e) { ${reactiveFunc}(e.target.value); }); 
             } catch {};
             components.push(ElementWeWant); 
             ${secondPart}

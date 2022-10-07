@@ -57,8 +57,8 @@
         <hOne <string "Welcome To Tix Tax Toe!">>
         <hTwo <array <string "Current Player: "> <var playertitle>>>
 
-        <usePortal warning WarningComponent <array parent>>
-        <usePortal gameOver WinningComponent <array parent gameOverText arrayTosend useGameOver usePlayer usePlayertitle>>
+        <usePortal warning WarningComponent <array >>
+        <usePortal gameOver WinningComponent <array gameOverText arrayTosend useGameOver usePlayer usePlayertitle>>
 
 
         <call board parent arrayTosend player <function FlickPlayer num <body

@@ -1,0 +1,15 @@
+<ComponentFunc boardItem mainParent reactiveState <body
+    <render <var mainParent> 
+        <div <empty> <string "test">
+            <usePortal reactiveState Image <array>>  
+        >
+    >
+>>
+
+<ComponentFunc Image mainParent <body
+     <render <var mainParent>
+        <p <string "X"> <string "largeX">>
+     >
+>>
+
+

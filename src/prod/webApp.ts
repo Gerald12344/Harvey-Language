@@ -6,6 +6,7 @@ import express, { Express } from 'express';
 export function SetupUpProdApp({ app, port, shipJS }: { app: Express; port: number; shipJS: boolean }) {
     let settings = fetchSettings();
 
+
     let text = readFileSync(join(resolve('./'), `./${settings.inputFolder}/public/index.html`), 'utf8').replace(
         /%public%/g,
         `./public`,

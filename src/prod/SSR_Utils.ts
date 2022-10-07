@@ -2,6 +2,7 @@ import { fetchLogger } from '../utils/logger';
 import { fetchSettings } from '../utils/settings';
 import express, { Express } from 'express';
 import { join, resolve } from 'path';
+
 const logger = fetchLogger();
 
 let functionsRoute: {
@@ -147,9 +148,20 @@ function HtmlToAst(
     if (ast === null || ast === undefined) return { body: '', head: '' };
 
     Object.entries(ast).forEach(([id, value]) => {
+        let extraSSR_Values = '';
+        if (value.SSR === undefined) {
+            value.SSR = {};
+        }
+        if (value.SSR.SSR === undefined) {
+            value.SSR.SSR = {};
+        }
+        Object.entries(value.SSR.SSR).forEach(([key, value]) => {
+            extraSSR_Values += ` ${key}="${value}"`;
+        });
+
         html_ed[id] = {
             opener: `<${value.type}${value.className === '' ? '' : ` class="${value.className ?? ''}"`}${injectJS ? ` id="${id ?? ''}"` : ''
-                }${value?.SSR?.SSR?.HREF !== undefined ? ` href="${value?.SSR?.SSR?.HREF}"` : ''}${value?.SSR?.SSR?.Type !== undefined ? ` type="${value?.SSR?.SSR?.Type}"` : ''}>${value.text ?? ''}`,
+                }${extraSSR_Values}>${value.text ?? ''}`,
             children: [],
             parent: value.parent,
             SSR: value.SSR,
@@ -206,6 +218,7 @@ export function injectHTML({ app, HTML, serverSideFunctions }: MainInput) {
 
     let MainExpressAPP = app;
     MainExpressAPP; // Silence compiler errors, cause its used in eval
+
     eval(serverSideFunctions);
 
     app.get('*', (req, res, next) => {

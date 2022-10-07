@@ -1,15 +1,14 @@
 // Source Code: for .Harvey Compiler!
 
 import { loadHarvScript } from './utils/pluginManager';
-import { CompiledOtherFiles } from './utils/compilerOtherFiles';
 import { CreateMainLogger } from './utils/logger';
 import { ChalkClass } from './utils/chalk';
-import { Express } from 'express';
+import express, { Express } from 'express';
 import { fetchSettings, loadSettings, lookforSettings } from './utils/settings';
 import { SetupUpProdApp } from './prod/webApp';
 import { compileFile } from './compiler/compilerEntry';
 import { injectHTML, SetupSSR } from './prod/SSR_Utils';
-import { readFileSync } from 'fs';
+
 
 // (c) - Harvey Randall 2020-2022
 
@@ -52,6 +51,9 @@ interface Options {
 export default async function app(options: Options) {
     let { port, SSR, injectJS, server } = options;
     let settings = fetchSettings();
+
+    server.use(express.json());
+    server.use(express.urlencoded({ extended: true }))
 
     if (port === undefined || port < 0 || port > 65535) {
         Chalk.red('Port not specified or outside of range 0-65535!');

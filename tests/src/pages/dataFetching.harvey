@@ -3,13 +3,9 @@
 >>
 
 <hookFunction dataTest <body
-    <letsmake <split dataFromApi setDataFromApi> <useHook <string "loading">>>
-
-    <useUpdate <async <Arrowfunc <body
-        <call setDataFromApi <CallRemoteFunc newApi <string "loading">>>
-    >>> <array>>
-
     <render <string "body">
-        <p dataFromApi>
+        <a <string "Home"> <string "Link"> <string "/">>
+
+        <p <CallRemoteFunc newApi <string "loading">>>
     >
 >>

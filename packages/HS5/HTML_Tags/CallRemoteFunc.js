@@ -1,21 +1,23 @@
 module.exports = {
     Command: function ({ input }) {
-        let propss = [...input];
-        propss.splice(0, 1).join(',');
-        propss.forEach((e, i) => {
-            if (i + 1 === propss.length) return;
-            propss[i] = e.replace('"', '').replace('"', '');
-        });
-        let last = propss[propss.length - 1];
-        propss.splice(propss.length - 1, 1);
+        let url = input[0];
+        let loadingText = input[1];
+
+        input.splice(0, 2);
+
+        let dataInput = 'let dataInput = JSON.stringify({});';
+        if (input.length > 0) {
+            dataInput = `let dataInput = JSON.stringify({ data: [${input}] });`;
+        }
 
         return `/* DATA FETCH */ 
         await (await (async () => {
             if (typeof Hydration === 'undefined') {
-                return fetch("/api/" + "${input[0]}");
+                ${dataInput}
+                return fetch("/api/" + "${url}", {method:"post", body: dataInput, headers:{'Content-Type':'application/json'}});
             } else {
                 return new Promise((resolve, reject) => {
-                    resolve({text: () => ${input[1]}});
+                    resolve({text: () => ${loadingText}});
                 });
             };
         })()).text()

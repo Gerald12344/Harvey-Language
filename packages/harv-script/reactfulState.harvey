@@ -16,7 +16,7 @@
     <reply <call output.join <string "">>>
 >>
 
-<function booleanComponentRendering boolean component variables <body
+<function booleanComponentRendering parent boolean component variables itt <body
     <letsmake cleanup <undefined>>
     <letsmake rendered <false>>
     <function updateSettingsCycle <body
@@ -25,7 +25,7 @@
                 <reply>
             >>
             <assign rendered <true>>
-            <assign cleanup <call <var component> <args variables> >>
+            <assign cleanup <call <var component> parent <args variables> <string ""> <var itt>>>
             
             <reply>  
         >>

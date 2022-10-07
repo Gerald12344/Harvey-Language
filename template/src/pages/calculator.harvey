@@ -31,23 +31,23 @@
         <div <empty> <string "calcBody"> 
             <hOne screenOutput <string "output">>
             <div <empty> <string "buttons-area">
-                <Component calculatorButton InternalUUID <string "1"> handleClick>
-                <Component calculatorButton InternalUUID <string "2"> handleClick>
-                <Component calculatorButton InternalUUID <string "3"> handleClick>
-                <Component calculatorButton InternalUUID <string "+"> handleClick>
-                <Component calculatorButton InternalUUID <string "4"> handleClick>
-                <Component calculatorButton InternalUUID <string "5"> handleClick>
-                <Component calculatorButton InternalUUID <string "6"> handleClick>
-                <Component calculatorButton InternalUUID <string "-"> handleClick>
-                <Component calculatorButton InternalUUID <string "7"> handleClick>
-                <Component calculatorButton InternalUUID <string "8"> handleClick>
-                <Component calculatorButton InternalUUID <string "9"> handleClick>
-                <Component calculatorButton InternalUUID <string "x"> handleClick>
+                <Component calculatorButton <string "1"> handleClick>
+                <Component calculatorButton <string "2"> handleClick>
+                <Component calculatorButton <string "3"> handleClick>
+                <Component calculatorButton <string "+"> handleClick>
+                <Component calculatorButton <string "4"> handleClick>
+                <Component calculatorButton <string "5"> handleClick>
+                <Component calculatorButton <string "6"> handleClick>
+                <Component calculatorButton <string "-"> handleClick>
+                <Component calculatorButton <string "7"> handleClick>
+                <Component calculatorButton <string "8"> handleClick>
+                <Component calculatorButton <string "9"> handleClick>
+                <Component calculatorButton <string "x"> handleClick>
 
-                <Component calculatorButton InternalUUID <string "÷"> handleClick>
-                <Component calculatorButton InternalUUID <string "0"> handleClick>
-                <Component calculatorButton InternalUUID <string "."> handleClick>
-                <Component calculatorButton InternalUUID <string "="> handleEnter>
+                <Component calculatorButton <string "÷"> handleClick>
+                <Component calculatorButton <string "0"> handleClick>
+                <Component calculatorButton <string "."> handleClick>
+                <Component calculatorButton <string "="> handleEnter>
             >
         >
 

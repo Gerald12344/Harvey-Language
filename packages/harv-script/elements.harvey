@@ -27,7 +27,7 @@
   <letsmake newElement <call document.getElementById id>>
   <if <notequal newElement <null>> <body
     <call newElement.removeAttribute <string "id">>
-    <call newElement.setAttribute <string "hyrdation"> <true>>
+    <call newElement.setAttribute <string "hydration"> <true>>
   >>
   
   <if <equal newElement <null>> <body

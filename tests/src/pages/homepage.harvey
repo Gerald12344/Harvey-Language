@@ -6,6 +6,7 @@
 <hookFunction homepage <body
 
     <letsmake <split dataFromApi setDataFromApi> <useHook <string "loading">>>
+    <letsmake <split newish setNew> <useHook <string "loading">>>
 
     <useUpdate <async <Arrowfunc <body
         <call setDataFromApi <CallRemoteFunc newApi <string "loading">>>
@@ -15,7 +16,9 @@
 
 
     <render <string "body">
-        <hOne <string "Welcome to .harvey playground!"> <string "Welcome">>
+        <hOne <string "Welcome to .harvey playground!"> <moduleLock "Welcome">>
+
+        <image <empty> <empty> <string "https://cloudfront-us-east-2.images.arcpublishing.com/reuters/2OQ4DCSJERKBNIFCNLOCBIC45I.jpg">>
 
         <hTwo <string "Where I will put all the projects I have been working on">>
 
@@ -24,9 +27,12 @@
             <li <empty> <empty> <a <string "Tic Tac Toe!"> <string "Link"> <string "tictactoe">>>
             <li <empty> <empty> <a <string "Clock!"> <string "Link"> <string "clock">>>
             <li <empty> <empty> <a <string "Calculator!"> <string "Link"> <string "calculator">>>
+            <li <empty> <empty> <a <string "Data!"> <string "Link"> <string "data">>>
+            <li <empty> <empty> <a <string "Pin Solitaire!"> <string "Link"> <string "pinSolitaire">>>
         >
 
-        <input <string ""> <empty> <string "text">>
+        <input <string ""> <empty> <string "text"> setNew>
+        <p newish>
         <p <var dataFromApi>>
         
         <style <scss "

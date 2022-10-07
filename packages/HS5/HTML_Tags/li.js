@@ -1,16 +1,12 @@
-const { v4: uuidv4 } = require('uuid');
+const BoilerPlater = require('./BOILERPLATE.js');
+
 module.exports = {
     Command: function ({ input }) {
-        let uuid = uuidv4();
-        let Parent = input[0];
-        let className = input[1];
-        input.splice(0, 2);
-        let Children = input.join(';');
-        let secondPart = '';
-        if (Children !== '') {
-            secondPart = `((parent) => {${Children}})(InternalUUID)`;
-        }
-        return `(() => {let InternalUUID = (typeof itteration_ID === "undefined" ? "" :  itteration_ID) + "${uuidv4()}"; let ElementWeWant = ReactfulElement('li',${Parent},parent, InternalUUID, ${className}); components.push(ElementWeWant); ${secondPart}})();`;
+        return BoilerPlater({
+            input,
+            inject: '',
+            typeIn: 'li',
+        });
     },
     Dependencies: function () {
         return false;

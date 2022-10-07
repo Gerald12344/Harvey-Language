@@ -11,7 +11,10 @@ module.exports = {
           let components = [];
           let _INTERNAL_UUID_USED_FOR_STYLES = getUID(6);
           /* Function To Remove Component*/
-          ${children};
+          ((InternalUUID) => {
+            ${children};
+          })(parent);
+          
           return (() => {
             if (typeof useUpdateArray !== 'undefined') {
               removeComponents(components, useUpdateArray)
