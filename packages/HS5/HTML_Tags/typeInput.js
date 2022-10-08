@@ -1,6 +1,6 @@
 module.exports = {
     Command: function ({ input }) {
-        return `??class: ${input.map((e) => `_INTERNAL_UUID_USED_FOR_STYLES + "_" + ${e}`).join(' + " " + ')}`;
+        return `??typeIn: ${input[0]}`;
     },
     Dependencies: function () {
         return false;

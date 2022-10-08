@@ -1,11 +1,11 @@
 <RemoteFunc newApi <body
-    <send <string "newApi better">>
+    <send "newApi better">
 >>
 
 <hookFunction dataTest <body
-    <render <string "body">
-        <a <string "Home"> <string "Link"> <string "/">>
+    <render "body"
+        <a <class "Link"> <text "Home"> <href "/">>
 
-        <p <CallRemoteFunc newApi <string "loading">>>
+        <p <text <CallRemoteFunc newApi "loading">>>
     >
 >>

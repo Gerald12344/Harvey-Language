@@ -13,7 +13,7 @@ export function parser(tokens: outputTozenised[]) {
         if (token.type === 'name') {
             current++;
             return {
-                type: 'StringLiteral',
+                type: 'NameLiteral',
                 value: token.value,
             };
         }

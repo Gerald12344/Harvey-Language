@@ -32,6 +32,15 @@ export function transformer(ast: astRoot): finalAST {
             },
         },
 
+        NameLiteral: {
+            enter(node: mainNode, parent: mainNode) {
+                parent?._context?.push({
+                    type: 'NameLiteral',
+                    value: node.value,
+                });
+            },
+        },
+
         CallExpression: {
             enter(node: mainNode, parent: mainNode) {
                 let expression: expressionIn = {

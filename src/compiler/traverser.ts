@@ -27,6 +27,7 @@ export function traverser(ast: astRoot, visitor: visitors) {
             case 'CallExpression':
                 traverseArray(node.params, node);
                 break;
+            case 'NameLiteral':
             case 'NumberLiteral':
             case 'StringLiteral':
                 break;

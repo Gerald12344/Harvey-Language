@@ -226,6 +226,28 @@
         {
             "case": "send",
             "file": "HTML_Tags/Send.js"
+        },
+
+
+        {
+            "case": "text",
+            "file": "HTML_Tags/text.js"
+        },
+        {
+            "case": "src",
+            "file": "HTML_Tags/src.js"
+        },
+        {
+            "case": "class",
+            "file": "HTML_Tags/class.js"
+        },
+        {
+            "case": "href",
+            "file": "HTML_Tags/href.js"
+        },
+        {
+            "case": "typeInput",
+            "file": "HTML_Tags/typeInput.js"
         }
     ]
 }

@@ -1,5 +1,5 @@
 <"Ok first website written entirely in .harvey">
-<string "use strict">
+<"use strict">
 
 <"First thing first make sure we need to get all of the Harvey Framework functions">
 <harvscript>
@@ -9,34 +9,23 @@
 <"Next load all bundles!">
 
 <"Fetch components">
-<iWant "src/components/globalCSS.harvey">
-<iWant "src/components/tixTaxToe.harvey">
 <iWant "src/pages/homepage.harvey">
-<iWant "src/pages/clock.harvey">
-<iWant "src/pages/calculator.harvey">
 <iWant "src/pages/dataFetching.harvey">
-<iWant "src/pages/pinSolitaire.harvey">
-<iWant "src/components/boarditem.harvey">
 
 
 <" We start with just the homepage">
 <Router RouterRoot <body
   <"First import global CSS">
-  <call GlobalCSS <string "body">>
 
-  <call RouterPoint <string "/"> <true> <var homepage>>
-  <call RouterPoint <string "/tictactoe"> <true> <var tixTaxToe>>
-  <call RouterPoint <string "/clock"> <true> <var Clock>>
-  <call RouterPoint <string "/calculator"> <true> <var Calculator>>
-  <call RouterPoint <string "/data"> <true> <var dataTest>>
-  <call RouterPoint <string "/pinSolitaire"> <true> <var pinSolitaire>>
+  <call RouterPoint "/" <true> <var homepage>>
+  <call RouterPoint "/data" <true> <var dataTest>>
 >>
 
 
 
 
 <"First wait for all content to load, especially bundle">
-<call window.addEventListener <string "load"> <Arrowfunc <body
+<call window.addEventListener "load" <Arrowfunc <body
   <"Start Harvscript Router and clear webpage">
   <call RouterRoot>
 

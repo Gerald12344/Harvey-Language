@@ -116,8 +116,8 @@
                 >>>
             >>
         >>
-        <assign <itterate returnObj <string "UUID">> UUID>
-        <assign <itterate returnObj <string "Element">> Element>
+        <assign <itterate returnObj "UUID"> UUID>
+        <assign <itterate returnObj "Element"> Element>
         <reply <var returnObj>>
     >>
 
@@ -194,8 +194,8 @@
     
 
     <letsmake returnObj <object>>
-    <assign <itterate returnObj <string "UUID">> UUID>
-    <assign <itterate returnObj <string "Element">> Element>
+    <assign <itterate returnObj "UUID"> UUID>
+    <assign <itterate returnObj "Element"> Element>
     <reply <var returnObj>>
 >>
 

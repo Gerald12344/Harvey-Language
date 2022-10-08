@@ -3,7 +3,7 @@
 
 <function element type text id parent className SSR <body
   <if <equal <typeof className <var className>> <string "object">> <body
-    <assign className <string "">>
+    <assign className "">
   >>
 
   <if <and <notequal <typeof Hydration> <string "undefined">> <equal <var Hydration> <true>>> <body
@@ -26,7 +26,7 @@
 
   <letsmake newElement <call document.getElementById id>>
   <if <notequal newElement <null>> <body
-    <call newElement.removeAttribute <string "id">>
+    <call newElement.removeAttribute "id">
     <call newElement.setAttribute <string "hydration"> <true>>
   >>
   
@@ -47,10 +47,10 @@
   <if <equal parentIn <undefined>> <body
     <if <equal <call document.getElementById <var id>> null> <body 
       <letsmake FoundParent <call document.getElementById parent>>
-      <if <equal <var parent> <string "body">> <body
+      <if <equal <var parent> "body"> <body
         <assign FoundParent <itterate <call document.getElementsByTagName parent> 0>>
       >>
-      <if <equal <var parent> <string "head">> <body
+      <if <equal <var parent> "head"> <body
         <assign FoundParent <itterate <call document.getElementsByTagName parent> 0>>
       >>
       <call FoundParent.appendChild <var newElement>>
@@ -60,7 +60,7 @@
     >>
   >>
 
-  <if <and <notequal className <undefined>> <notequal className <string "">> > <body
+  <if <and <notequal className <undefined>> <notequal className <string>> > <body
     <assign newElement.className className>
   >>
 

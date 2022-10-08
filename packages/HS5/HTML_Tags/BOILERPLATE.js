@@ -1,13 +1,37 @@
 const { v4: uuidv4 } = require('uuid');
 
+function findStart(loop, check) {
+    for (let i = 0; i < loop.length; i++) {
+        if (loop[i].startsWith(check)) {
+            try {
+                return `${loop[i].replace(check, '')}`;
+            } catch (e) {
+                return '';
+            }
+        }
+    }
+}
+
+function findExtra(loop) {
+    for (let i = 0; i < loop.length; i++) {
+        if (!loop[i].startsWith('??')) {
+            try {
+                return `${loop[i]}`;
+            } catch (e) {
+                return '';
+            }
+        }
+    }
+}
+
 module.exports = function ({ input, inject, typeIn, splice = 2, SSR = {} }) {
-    let Parent = input[0];
-    let className = input[1];
-    input.splice(0, splice);
-    let Children = input.join(';');
+    let Parent = findStart(input, '??text: ') ?? '""';
+    let className = findStart(input, '??class: ') ?? '""';
+
+    let Children = findExtra(input);
     let secondPart = '';
-    if (Children !== '') {
-        secondPart = `((parent) => {${Children}})(InternalUUID)`;
+    if (Children !== '' && Children !== undefined) {
+        secondPart = `(async (parent) => {${Children}})(InternalUUID)`;
     }
 
     // Clean SSR
@@ -20,7 +44,7 @@ module.exports = function ({ input, inject, typeIn, splice = 2, SSR = {} }) {
     return `
     (async () => {
         let InternalUUID = (typeof itteration_ID === "undefined" ? "" :  itteration_ID) + "${uuidv4()}"; 
-        let ElementWeWant = ReactfulElement('${typeIn}',${Parent},parent, InternalUUID, ${
+        let ElementWeWant = ReactfulElement("${typeIn}",${Parent},parent, InternalUUID, ${
         className === undefined || className === '' ? 'undefined' : className
     }, {SSR: ${JSON.stringify(SSR)}});
         

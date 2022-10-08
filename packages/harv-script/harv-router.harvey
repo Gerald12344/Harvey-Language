@@ -9,7 +9,7 @@
       >>
     >>
     <letsmake Root document.body>
-    <assign Root.innerHTML <string "">>
+    <assign Root.innerHTML "">
     
     <comment "lets just prevent any memory leaks">
     <assign componentHashTree <object>>
@@ -18,7 +18,7 @@
     <call history.pushState <string ""> <string ""> <var body>>
 
     <"just console it if for now">
-    <sendOut <add <string "%c[Harv-Script]"> <string "%c - Page location changed to "> <var window.location.pathname> <string "!">> <string "color:#00B5E2"> <string "color:white">>
+    <sendOut <add "%c[Harv-Script]" "%c - Page location changed to " <var window.location.pathname> "!"> "color:#00B5E2" "color:white">
   
     <call ReturnFunc>
   >>>

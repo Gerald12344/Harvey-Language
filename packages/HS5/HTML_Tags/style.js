@@ -4,6 +4,8 @@ module.exports = {
         let styleString = input[0] ?? '';
         let ModuleLocked = input[1];
 
+        styleString = styleString.replace('text: ', '');
+
         input.splice(0, 2);
         let Children = input.join(';');
         let secondPart = '';

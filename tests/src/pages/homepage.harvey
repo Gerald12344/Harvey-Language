@@ -1,39 +1,26 @@
 
 <RemoteFunc newApi <body
-    <send <string "newApi better">>
+    <send "newApi better">
 >>
 
 <hookFunction homepage <body
 
-    <letsmake <split dataFromApi setDataFromApi> <useHook <string "loading">>>
-    <letsmake <split newish setNew> <useHook <string "loading">>>
+    <letsmake <split data setData> <useHook "hello">>
 
-    <useUpdate <async <Arrowfunc <body
-        <call setDataFromApi <CallRemoteFunc newApi <string "loading">>>
-    >>> <array>>
+    <render "body"
+        <hOne <text "Welcome to .harvey playground!"> <moduleLock "Welcome">>
 
+        <image <src "https://cloudfront-us-east-2.images.arcpublishing.com/reuters/2OQ4DCSJERKBNIFCNLOCBIC45I.jpg">>
 
+        <hTwo <text "Where I will put all the projects I have been working on">>
 
-
-    <render <string "body">
-        <hOne <string "Welcome to .harvey playground!"> <moduleLock "Welcome">>
-
-        <image <empty> <empty> <string "https://cloudfront-us-east-2.images.arcpublishing.com/reuters/2OQ4DCSJERKBNIFCNLOCBIC45I.jpg">>
-
-        <hTwo <string "Where I will put all the projects I have been working on">>
-
-        <hThree <string "Here is a list of all pages so far!">>
-        <ul <empty> <moduleLock "list">
-            <li <empty> <empty> <a <string "Tic Tac Toe!"> <string "Link"> <string "tictactoe">>>
-            <li <empty> <empty> <a <string "Clock!"> <string "Link"> <string "clock">>>
-            <li <empty> <empty> <a <string "Calculator!"> <string "Link"> <string "calculator">>>
-            <li <empty> <empty> <a <string "Data!"> <string "Link"> <string "data">>>
-            <li <empty> <empty> <a <string "Pin Solitaire!"> <string "Link"> <string "pinSolitaire">>>
+        <hThree <text "Here is a list of all pages so far!">>
+        <ul <moduleLock "list">
+            <li <a <text "Data!"> <class "Link"> <href "data">>>
         >
 
-        <input <string ""> <empty> <string "text"> setNew>
-        <p newish>
-        <p <var dataFromApi>>
+        <p <text data>>
+
         
         <style <scss "
             .Welcome {

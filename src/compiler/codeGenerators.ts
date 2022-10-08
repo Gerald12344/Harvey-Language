@@ -114,8 +114,8 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                             .replace('"', '')}) => {${promiseArray.join(';')}}))`;
 
                 case 'iNeed':
-                    modules.push(node?.arguments?.map((e) => codeGenerator(e as finalAST)) as unknown as string);
-                    return `require("${node?.arguments?.map((e) => codeGenerator(e as finalAST))}")`;
+                    modules.push((node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as unknown as string).replace(/"/g, ""));
+                    return `require(${node?.arguments?.map((e) => codeGenerator(e as finalAST))})`;
                 case 'iWant':
                     let data = readFileSync(
                         (node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string)
@@ -244,7 +244,7 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
                             __dirname,
                             '../../packages/harv-script',
                             '/',
-                            (node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string).replace('"', ''),
+                            (node?.arguments?.map((e) => codeGenerator(e as finalAST))[0] as string).replace(/\"/g, ''),
                         ),
                         'utf-8',
                     );
@@ -270,10 +270,13 @@ export function codeGenerator(node: finalAST, InjectJS = false): string | finalA
         case 'Identifier':
             return node.name as string;
 
+        case 'NameLiteral':
+            return `${node.value}` as string ?? "";
+
         case 'NumberLiteral':
             return node.value as string;
         case 'StringLiteral':
-            return node.value as string;
+            return "\"" + node.value as string + "\"";
 
         default:
             fetchLogger()?.log('error', node?.type);
