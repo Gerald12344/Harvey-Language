@@ -11,11 +11,13 @@
 <"Fetch components">
 <iWant "src/pages/homepage.harvey">
 <iWant "src/pages/dataFetching.harvey">
+<iWant "src/components/globalCSS.harvey">
 
 
 <" We start with just the homepage">
 <Router RouterRoot <body
   <"First import global CSS">
+  <call globalCSS>
 
   <call RouterPoint "/" <true> <var homepage>>
   <call RouterPoint "/data" <true> <var dataTest>>

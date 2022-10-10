@@ -1,10 +1,11 @@
 const { v4: uuidv4 } = require('uuid');
 
 const BoilerPlater = require('./BOILERPLATE.js');
+const FindStart = require('./FindStart.js');
 
 module.exports = {
     Command: function ({ input }) {
-        let src = input[2];
+        let src = FindStart(input, '??src: ');
 
         return BoilerPlater({
             input,

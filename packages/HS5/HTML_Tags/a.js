@@ -1,22 +1,11 @@
 const { v4: uuidv4 } = require('uuid');
 
 const BoilerPlater = require('./BOILERPLATE.js');
-
-function findStart(loop, check) {
-    for (let i = 0; i < loop.length; i++) {
-        if (loop[i].startsWith(check)) {
-            try {
-                return `${loop[i].replace(check, '')}`;
-            } catch (e) {
-                return '';
-            }
-        }
-    }
-}
+const FindStart = require('./FindStart.js');
 
 module.exports = {
     Command: function ({ input }) {
-        let href = findStart(input, '??href: ');
+        let href = FindStart(input, '??href: ');
         return BoilerPlater({
             input,
             inject: `

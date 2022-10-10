@@ -1,0 +1,9 @@
+<hookFunction globalCSS <body
+    <render "body"
+        <style "
+            .Link {
+                color:green;
+            }
+        " <false>>
+    >
+>>
