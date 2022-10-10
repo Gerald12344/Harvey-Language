@@ -231,23 +231,27 @@
 
         {
             "case": "text",
-            "file": "HTML_Tags/text.js"
+            "file": "HTML_Tags/tags/text.js"
         },
         {
             "case": "src",
-            "file": "HTML_Tags/src.js"
+            "file": "HTML_Tags/tags/src.js"
         },
         {
             "case": "class",
-            "file": "HTML_Tags/class.js"
+            "file": "HTML_Tags/tags/class.js"
         },
         {
             "case": "href",
-            "file": "HTML_Tags/href.js"
+            "file": "HTML_Tags/tags/href.js"
         },
         {
             "case": "typeInput",
-            "file": "HTML_Tags/typeInput.js"
+            "file": "HTML_Tags/tags/typeInput.js"
+        },
+        {
+            "case": "event",
+            "file": "HTML_Tags/tags/event.js"
         }
     ]
 }

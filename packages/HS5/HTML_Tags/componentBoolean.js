@@ -1,17 +1,16 @@
 const { v4 } = require('uuid');
-let div = require('./div');
+
+const BoilerPlater = require('./BOILERPLATE.js');
+
 module.exports = {
     Command: function ({ input }) {
-        let arrayToSend = [
-            '""',
-            '',
-            input[3],
-            `(() => {let CompId = ""; if (!(typeof myId === 'undefined')) {CompId = myId};booleanComponentRendering(parent, ${input.join(
+        return BoilerPlater({
+            input: [],
+            inject: `(() => {let CompId = ""; if (!(typeof myId === 'undefined')) {CompId = myId};booleanComponentRendering(InternalUUID, ${input.join(
                 ', ',
             )}, CompId ?? "")})();`,
-        ];
-        let string = div.Command({ input: arrayToSend });
-        return `${string}`;
+            typeIn: 'div',
+        });
     },
     Dependencies: function () {
         return false;

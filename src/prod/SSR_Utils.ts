@@ -80,6 +80,8 @@ export function SetupSSR(codeCompiled: string, injectJS: boolean) {
         return true;
     });
 
+
+
     Global.forEach((e) => {
         let AST = GenerateASTForPage(codeCompiled, e);
         let HTML = HtmlToAst(AST, injectJS);
@@ -204,7 +206,7 @@ export function injectHTML({ app, HTML, serverSideFunctions }: MainInput) {
     let settings = fetchSettings();
 
     Object.entries(SSR_CACHE).forEach(([key, value]) => {
-        app.get(key, (req, res) => {
+        app.get(key.replace(/\"/g, ""), (req, res) => {
             let bodyMain = value?.body ?? '';
             let headMain = value?.head ?? '';
             let newHtml;
