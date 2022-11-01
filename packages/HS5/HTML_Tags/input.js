@@ -12,7 +12,7 @@ module.exports = {
             typeIn: 'input',
             splice: 4,
             SSR: {
-                Type: type,
+                type,
             },
         });
     },
